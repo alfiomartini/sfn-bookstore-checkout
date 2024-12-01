@@ -1,0 +1,174 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Transform: "AWS::Serverless-2016-10-31"
+Resources:
+  CheckInventoryFunction:
+    Type: "AWS::Serverless::Function"
+    Properties:
+      Handler: handler.checkInventory
+      Runtime: nodejs12.x
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: bookTable
+        - DynamoDBCrudPolicy:
+            TableName: userTable
+        - SNSCrudPolicy:
+            TopicName: NotifyCourier
+        - SQSPolicy:
+            QueueName: OrdersQueue
+        - Statement:
+            Effect: Allow
+            Action: states:*
+            Resource: arn:aws:states:us-east-1:<accountId>:stateMachine:storeCheckoutFlow
+
+  CalculateTotalFunction:
+    Type: "AWS::Serverless::Function"
+    Properties:
+      Handler: handler.calculateTotal
+      Runtime: nodejs12.x
+
+  RedeemPointsFunction:
+    Type: "AWS::Serverless::Function"
+    Properties:
+      Handler: handler.redeemPoints
+      Runtime: nodejs12.x
+
+  BillCustomerFunction:
+    Type: "AWS::Serverless::Function"
+    Properties:
+      Handler: handler.billCustomer
+      Runtime: nodejs12.x
+
+  RestoreRedeemPointsFunction:
+    Type: "AWS::Serverless::Function"
+    Properties:
+      Handler: handler.restoreRedeemPoints
+      Runtime: nodejs12.x
+
+  RestoreQuantityFunction:
+    Type: "AWS::Serverless::Function"
+    Properties:
+      Handler: handler.restoreQuantity
+      Runtime: nodejs12.x
+
+  SQSWorkerFunction:
+    Type: "AWS::Serverless::Function"
+    Properties:
+      Handler: handler.sqsWorker
+      Runtime: nodejs12.x
+      Events:
+        SQSEvent:
+          Type: SQS
+          Properties:
+            Queue: !GetAtt OrdersQueue.Arn
+            BatchSize: 1
+
+  OrdersQueue:
+    Type: "AWS::SQS::Queue"
+
+  NotifyCourierTopic:
+    Type: "AWS::SNS::Topic"
+
+  StoreCheckoutFlowStateMachine:
+    Type: "AWS::StepFunctions::StateMachine"
+    Properties:
+      Definition:
+        StartAt: checkInventory
+        States:
+          checkInventory:
+            Type: Task
+            Resource: !GetAtt CheckInventoryFunction.Arn
+            Catch:
+              - ErrorEquals: [BookNotFound]
+                Next: BookNotFoundError
+              - ErrorEquals: [BookOutOfStock]
+                Next: BookOutOfStockError
+            ResultPath: "$.book"
+            Next: calculateTotal
+          calculateTotal:
+            Type: Task
+            Resource: !GetAtt CalculateTotalFunction.Arn
+            ResultPath: "$.total"
+            Next: isRedeemNeeded
+          isRedeemNeeded:
+            Type: Choice
+            Choices:
+              - Variable: $.redeem
+                BooleanEquals: true
+                Next: RedeemPoints
+            Default: BillCustomer
+          RedeemPoints:
+            Type: Task
+            Resource: !GetAtt RedeemPointsFunction.Arn
+            ResultPath: "$.total"
+            Catch:
+              - ErrorEquals: [States.ALL]
+                Next: RedeemPointsError
+            Next: BillCustomer
+          BillCustomer:
+            Type: Task
+            Resource: !GetAtt BillCustomerFunction.Arn
+            ResultPath: "$.billingStatus"
+            Retry:
+              - ErrorEquals: [States.ALL]
+                MaxAttempts: 0
+            Catch:
+              - ErrorEquals: [States.ALL]
+                ResultPath: "$.customerBilling"
+                Next: BillingError
+            Next: PrepareOrder
+          PrepareOrder:
+            Type: Task
+            Resource: arn:aws:states:::sqs:sendMessage.waitForTaskToken
+            Parameters:
+              QueueUrl: https://sqs.us-east-1.amazonaws.com/<accountId>/OrdersQueue
+              MessageBody:
+                Input.$: "$"
+                Token.$: "$$.Task.Token"
+            ResultPath: "$.courierStatus"
+            Catch:
+              - ErrorEquals: [NoCourierAvailable]
+                ResultPath: "$.courierError"
+                Next: RefundCustomer
+            Next: DispatchOrder
+          DispatchOrder:
+            Type: Task
+            Resource: arn:aws:states:::sns:publish
+            Parameters:
+              TopicArn: arn:aws:sns:us-east-1:<accountId>:NotifyCourier
+              Message.$: "$"
+            Next: Dispatched
+          Dispatched:
+            Type: Pass
+            Result: "Your order will be dispatched in 24 hours"
+            End: true
+          RestoreRedeemPoints:
+            Type: Task
+            Resource: !GetAtt RestoreRedeemPointsFunction.Arn
+            End: true
+          RestoreQuantity:
+            Type: Task
+            Resource: !GetAtt RestoreQuantityFunction.Arn
+            ResultPath: "$.quantityRestoreStatus"
+            Next: RestoreRedeemPoints
+          RefundCustomer:
+            Type: Pass
+            Result: "Customer is refunded"
+            ResultPath: "$.refundStatus"
+            Next: RestoreQuantity
+          BookNotFoundError:
+            Type: Pass
+            Result: "No such book available"
+            End: true
+          BookOutOfStockError:
+            Type: Pass
+            Result: "Sorry, the books is out of stock"
+            End: true
+          RedeemPointsError:
+            Type: Pass
+            Result: "Error in redeeming points"
+            End: true
+          BillingError:
+            Type: Pass
+            Result: "Billing error"
+            ResultPath: "$.billingStatus"
+            Next: RestoreRedeemPoints

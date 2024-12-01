@@ -10,9 +10,7 @@ Resources:
       KeySchema:
         - AttributeName: bookid
           KeyType: HASH
-      ProvisionedThroughput:
-        ReadCapacityUnits: 5
-        WriteCapacityUnits: 5
+      BillingMode: PAY_PER_REQUEST
 
   UserTable:
     Type: "AWS::DynamoDB::Table"
@@ -23,9 +21,7 @@ Resources:
       KeySchema:
         - AttributeName: userid
           KeyType: HASH
-      ProvisionedThroughput:
-        ReadCapacityUnits: 5
-        WriteCapacityUnits: 5
+      BillingMode: PAY_PER_REQUEST
 
   CheckInventoryFunction:
     Type: "AWS::Serverless::Function"

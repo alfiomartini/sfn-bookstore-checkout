@@ -33,48 +33,53 @@ Resources:
       Handler: handler.checkInventory
       Runtime: nodejs12.x
       Policies:
-        - DynamoDBCrudPolicy:
+        - DynamoDBReadPolicy:
             TableName: !Ref BookTable
-        - DynamoDBCrudPolicy:
-            TableName: !Ref UserTable
-        - SNSCrudPolicy:
-            TopicName: NotifyCourier
-        - SQSPolicy:
-            QueueName: OrdersQueue
-        - Statement:
-            Effect: Allow
-            Action: states:*
-            Resource: arn:aws:states:us-east-1:<accountId>:stateMachine:storeCheckoutFlow
 
-  CalculateTotalFunction:
+  DeductPointsFunction:
     Type: "AWS::Serverless::Function"
     Properties:
-      Handler: handler.calculateTotal
+      Handler: handler.deductPoints
       Runtime: nodejs12.x
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: !Ref UserTable
+
+  UpdateBookQuantityFunction:
+    Type: "AWS::Serverless::Function"
+    Properties:
+      Handler: handler.updateBookQuantity
+      Runtime: nodejs12.x
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: !Ref BookTable
 
   RedeemPointsFunction:
     Type: "AWS::Serverless::Function"
     Properties:
       Handler: handler.redeemPoints
       Runtime: nodejs12.x
-
-  BillCustomerFunction:
-    Type: "AWS::Serverless::Function"
-    Properties:
-      Handler: handler.billCustomer
-      Runtime: nodejs12.x
+      Policies:
+        - DynamoDBReadPolicy:
+            TableName: !Ref UserTable
 
   RestoreRedeemPointsFunction:
     Type: "AWS::Serverless::Function"
     Properties:
       Handler: handler.restoreRedeemPoints
       Runtime: nodejs12.x
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: !Ref UserTable
 
   RestoreQuantityFunction:
     Type: "AWS::Serverless::Function"
     Properties:
       Handler: handler.restoreQuantity
       Runtime: nodejs12.x
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: !Ref BookTable
 
   SQSWorkerFunction:
     Type: "AWS::Serverless::Function"

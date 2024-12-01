@@ -26,8 +26,9 @@ Resources:
   CheckInventoryFunction:
     Type: "AWS::Serverless::Function"
     Properties:
-      Handler: handler.checkInventory
+      Handler: index.checkInventory
       Runtime: nodejs12.x
+      CodeUri: src/handlers
       Policies:
         - DynamoDBReadPolicy:
             TableName: !Ref BookTable
@@ -35,8 +36,9 @@ Resources:
   DeductPointsFunction:
     Type: "AWS::Serverless::Function"
     Properties:
-      Handler: handler.deductPoints
+      Handler: index.deductPoints
       Runtime: nodejs12.x
+      CodeUri: src/handlers
       Policies:
         - DynamoDBCrudPolicy:
             TableName: !Ref UserTable
@@ -44,8 +46,9 @@ Resources:
   UpdateBookQuantityFunction:
     Type: "AWS::Serverless::Function"
     Properties:
-      Handler: handler.updateBookQuantity
+      Handler: index.updateBookQuantity
       Runtime: nodejs12.x
+      CodeUri: src/handlers
       Policies:
         - DynamoDBCrudPolicy:
             TableName: !Ref BookTable
@@ -53,8 +56,9 @@ Resources:
   RedeemPointsFunction:
     Type: "AWS::Serverless::Function"
     Properties:
-      Handler: handler.redeemPoints
+      Handler: index.redeemPoints
       Runtime: nodejs12.x
+      CodeUri: src/handlers
       Policies:
         - DynamoDBReadPolicy:
             TableName: !Ref UserTable
@@ -62,8 +66,9 @@ Resources:
   RestoreRedeemPointsFunction:
     Type: "AWS::Serverless::Function"
     Properties:
-      Handler: handler.restoreRedeemPoints
+      Handler: index.restoreRedeemPoints
       Runtime: nodejs12.x
+      CodeUri: src/handlers
       Policies:
         - DynamoDBCrudPolicy:
             TableName: !Ref UserTable
@@ -71,8 +76,9 @@ Resources:
   RestoreQuantityFunction:
     Type: "AWS::Serverless::Function"
     Properties:
-      Handler: handler.restoreQuantity
+      Handler: index.restoreQuantity
       Runtime: nodejs12.x
+      CodeUri: src/handlers
       Policies:
         - DynamoDBCrudPolicy:
             TableName: !Ref BookTable
@@ -80,8 +86,9 @@ Resources:
   SQSWorkerFunction:
     Type: "AWS::Serverless::Function"
     Properties:
-      Handler: handler.sqsWorker
+      Handler: index.sqsWorker
       Runtime: nodejs12.x
+      CodeUri: src/handlers
       Events:
         SQSEvent:
           Type: SQS

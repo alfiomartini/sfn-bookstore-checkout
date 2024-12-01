@@ -1,5 +1,14 @@
 AWSTemplateFormatVersion: "2010-09-09"
 Transform: "AWS::Serverless-2016-10-31"
+Globals:
+  Function:
+    Runtime: nodejs20.x
+    CodeUri: src/handlers
+    Environment:
+      Variables:
+        BOOK_TABLE: !Ref BookTable
+        USER_TABLE: !Ref UserTable
+
 Resources:
   BookTable:
     Type: "AWS::DynamoDB::Table"
@@ -27,8 +36,6 @@ Resources:
     Type: "AWS::Serverless::Function"
     Properties:
       Handler: index.checkInventory
-      Runtime: nodejs20.x
-      CodeUri: src/handlers
       Policies:
         - DynamoDBReadPolicy:
             TableName: !Ref BookTable
@@ -37,8 +44,6 @@ Resources:
     Type: "AWS::Serverless::Function"
     Properties:
       Handler: index.deductPoints
-      Runtime: nodejs20.x
-      CodeUri: src/handlers
       Policies:
         - DynamoDBCrudPolicy:
             TableName: !Ref UserTable
@@ -47,8 +52,6 @@ Resources:
     Type: "AWS::Serverless::Function"
     Properties:
       Handler: index.updateBookQuantity
-      Runtime: nodejs20.x
-      CodeUri: src/handlers
       Policies:
         - DynamoDBCrudPolicy:
             TableName: !Ref BookTable
@@ -57,8 +60,6 @@ Resources:
     Type: "AWS::Serverless::Function"
     Properties:
       Handler: index.redeemPoints
-      Runtime: nodejs20.x
-      CodeUri: src/handlers
       Policies:
         - DynamoDBReadPolicy:
             TableName: !Ref UserTable
@@ -67,8 +68,6 @@ Resources:
     Type: "AWS::Serverless::Function"
     Properties:
       Handler: index.restoreRedeemPoints
-      Runtime: nodejs20.x
-      CodeUri: src/handlers
       Policies:
         - DynamoDBCrudPolicy:
             TableName: !Ref UserTable
@@ -77,8 +76,6 @@ Resources:
     Type: "AWS::Serverless::Function"
     Properties:
       Handler: index.restoreQuantity
-      Runtime: nodejs20.x
-      CodeUri: src/handlers
       Policies:
         - DynamoDBCrudPolicy:
             TableName: !Ref BookTable
@@ -87,8 +84,6 @@ Resources:
     Type: "AWS::Serverless::Function"
     Properties:
       Handler: index.sqsWorker
-      Runtime: nodejs20.x
-      CodeUri: src/handlers
       Events:
         SQSEvent:
           Type: SQS

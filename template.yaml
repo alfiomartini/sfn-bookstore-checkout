@@ -27,7 +27,7 @@ Resources:
     Type: "AWS::Serverless::Function"
     Properties:
       Handler: index.checkInventory
-      Runtime: nodejs12.x
+      Runtime: nodejs20.x
       CodeUri: src/handlers
       Policies:
         - DynamoDBReadPolicy:
@@ -37,7 +37,7 @@ Resources:
     Type: "AWS::Serverless::Function"
     Properties:
       Handler: index.deductPoints
-      Runtime: nodejs12.x
+      Runtime: nodejs20.x
       CodeUri: src/handlers
       Policies:
         - DynamoDBCrudPolicy:
@@ -47,7 +47,7 @@ Resources:
     Type: "AWS::Serverless::Function"
     Properties:
       Handler: index.updateBookQuantity
-      Runtime: nodejs12.x
+      Runtime: nodejs20.x
       CodeUri: src/handlers
       Policies:
         - DynamoDBCrudPolicy:
@@ -57,7 +57,7 @@ Resources:
     Type: "AWS::Serverless::Function"
     Properties:
       Handler: index.redeemPoints
-      Runtime: nodejs12.x
+      Runtime: nodejs20.x
       CodeUri: src/handlers
       Policies:
         - DynamoDBReadPolicy:
@@ -67,7 +67,7 @@ Resources:
     Type: "AWS::Serverless::Function"
     Properties:
       Handler: index.restoreRedeemPoints
-      Runtime: nodejs12.x
+      Runtime: nodejs20.x
       CodeUri: src/handlers
       Policies:
         - DynamoDBCrudPolicy:
@@ -77,7 +77,7 @@ Resources:
     Type: "AWS::Serverless::Function"
     Properties:
       Handler: index.restoreQuantity
-      Runtime: nodejs12.x
+      Runtime: nodejs20.x
       CodeUri: src/handlers
       Policies:
         - DynamoDBCrudPolicy:
@@ -87,7 +87,7 @@ Resources:
     Type: "AWS::Serverless::Function"
     Properties:
       Handler: index.sqsWorker
-      Runtime: nodejs12.x
+      Runtime: nodejs20.x
       CodeUri: src/handlers
       Events:
         SQSEvent:

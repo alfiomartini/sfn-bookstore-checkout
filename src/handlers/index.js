@@ -1,28 +1,42 @@
-const AWS = require("aws-sdk");
-const StepFunction = new AWS.StepFunctions();
-const DynamoDB = require("aws-sdk/clients/dynamodb");
-const DocumentClient = new DynamoDB.DocumentClient({ region: "us-east-1" });
+import {
+  StepFunctionsClient,
+  SendTaskSuccessCommand,
+  SendTaskFailureCommand,
+} from "@aws-sdk/client-sfn";
+import {
+  DynamoDBClient,
+  QueryCommand,
+  UpdateItemCommand,
+  GetItemCommand,
+} from "@aws-sdk/client-dynamodb";
+
+const region = process.env.AWS_REGION || "us-east-1";
+const stepFunctionsClient = new StepFunctionsClient({ region });
+const dynamoDBClient = new DynamoDBClient({ region });
+
+const USER_TABLE = process.env.USER_TABLE || "";
+const BOOK_TABLE = process.env.BOOK_TABLE || "";
 
 const isBookAvailable = (book, quantity) => {
   return book.quantity - quantity > 0;
 };
 
-module.exports.checkInventory = async ({ bookId, quantity }) => {
+export const checkInventory = async ({ bookId, quantity }) => {
   try {
-    let params = {
-      TableName: "bookTable",
+    const params = {
+      TableName: BOOK_TABLE,
       KeyConditionExpression: "bookId = :bookId",
       ExpressionAttributeValues: {
-        ":bookId": bookId,
+        ":bookId": { S: bookId },
       },
     };
-    let result = await DocumentClient.query(params).promise();
-    let book = result.Items[0];
+    const result = await dynamoDBClient.send(new QueryCommand(params));
+    const book = result.Items[0];
 
     if (isBookAvailable(book, quantity)) {
       return book;
     } else {
-      let bookOutOfStockError = new Error("The book is out of stock");
+      const bookOutOfStockError = new Error("The book is out of stock");
       bookOutOfStockError.name = "BookOutOfStock";
       throw bookOutOfStockError;
     }
@@ -30,20 +44,20 @@ module.exports.checkInventory = async ({ bookId, quantity }) => {
     if (e.name === "BookOutOfStock") {
       throw e;
     } else {
-      let bookNotFoundError = new Error(e);
+      const bookNotFoundError = new Error(e);
       bookNotFoundError.name = "BookNotFound";
       throw bookNotFoundError;
     }
   }
 };
 
-module.exports.calculateTotal = async ({ book, quantity }) => {
+export const calculateTotal = async ({ book, quantity }) => {
   console.log("book: ", book);
-  let total = book.price * quantity;
+  const total = book.price * quantity;
   return { total };
 };
 
-module.exports.billCustomer = async (params) => {
+export const billCustomer = async (params) => {
   console.log(params);
   // throw 'Error in billing'
   /* Bill the customer e.g. Using Stripe token from the paramerters */
@@ -51,45 +65,46 @@ module.exports.billCustomer = async (params) => {
 };
 
 const deductPoints = async (userId) => {
-  let params = {
-    TableName: "userTable",
-    Key: { userId: userId },
+  const params = {
+    TableName: USER_TABLE,
+    Key: { userId: { S: userId } },
     UpdateExpression: "set points = :zero",
     ExpressionAttributeValues: {
-      ":zero": 0,
+      ":zero": { N: "0" },
     },
   };
-  await DocumentClient.update(params).promise();
+  await dynamoDBClient.send(new UpdateItemCommand(params));
 };
 
 const updateBookQuantity = async (bookId, orderQuantity) => {
   console.log("bookId: ", bookId);
   console.log("orderQuantity: ", orderQuantity);
-  let params = {
-    TableName: "bookTable",
-    Key: { bookId: bookId },
+  const params = {
+    TableName: BOOK_TABLE,
+    Key: { bookId: { S: bookId } },
     UpdateExpression: "SET quantity = quantity - :orderQuantity",
     ExpressionAttributeValues: {
-      ":orderQuantity": orderQuantity,
+      ":orderQuantity": { N: orderQuantity.toString() },
     },
   };
-  await DocumentClient.update(params).promise();
+  await dynamoDBClient.send(new UpdateItemCommand(params));
 };
-module.exports.redeemPoints = async ({ userId, total }) => {
+
+export const redeemPoints = async ({ userId, total }) => {
   console.log("userId: ", userId);
   let orderTotal = total.total;
   console.log("orderTotal:", orderTotal);
   try {
-    let params = {
-      TableName: "userTable",
+    const params = {
+      TableName: USER_TABLE,
       Key: {
-        userId: userId,
+        userId: { S: userId },
       },
     };
-    let result = await DocumentClient.get(params).promise();
-    let user = result.Item;
+    const result = await dynamoDBClient.send(new GetItemCommand(params));
+    const user = result.Item;
     console.log("user: ", user);
-    const points = user.points;
+    const points = user.points.N;
     console.log("points: ", points);
     if (orderTotal > points) {
       await deductPoints(userId);
@@ -103,62 +118,66 @@ module.exports.redeemPoints = async ({ userId, total }) => {
   }
 };
 
-module.exports.restoreRedeemPoints = async ({ userId, total }) => {
+export const restoreRedeemPoints = async ({ userId, total }) => {
   try {
     if (total.points) {
-      let params = {
-        TableName: "userTable",
-        Key: { userId: userId },
+      const params = {
+        TableName: USER_TABLE,
+        Key: { userId: { S: userId } },
         UpdateExpression: "set points = :points",
         ExpressionAttributeValues: {
-          ":points": total.points,
+          ":points": { N: total.points.toString() },
         },
       };
-      await DocumentClient.update(params).promise();
+      await dynamoDBClient.send(new UpdateItemCommand(params));
     }
   } catch (e) {
     throw new Error(e);
   }
 };
 
-module.exports.sqsWorker = async (event) => {
+export const sqsWorker = async (event) => {
   try {
     console.log(JSON.stringify(event));
-    let record = event.Records[0];
-    var body = JSON.parse(record.body);
+    const record = event.Records[0];
+    const body = JSON.parse(record.body);
     /** Find a courier and attach courier information to the order */
-    let courier = "<courier email>";
+    const courier = "<courier email>";
 
     // update book quantity
     await updateBookQuantity(body.Input.bookId, body.Input.quantity);
 
     // throw "Something wrong with Courier API";
 
-    // Attach curier information to the order
-    await StepFunction.sendTaskSuccess({
-      output: JSON.stringify({ courier }),
-      taskToken: body.Token,
-    }).promise();
+    // Attach courier information to the order
+    await stepFunctionsClient.send(
+      new SendTaskSuccessCommand({
+        output: JSON.stringify({ courier }),
+        taskToken: body.Token,
+      })
+    );
   } catch (e) {
     console.log("===== You got an Error =====");
     console.log(e);
-    await StepFunction.sendTaskFailure({
-      error: "NoCourierAvailable",
-      cause: "No couriers are available",
-      taskToken: body.Token,
-    }).promise();
+    await stepFunctionsClient.send(
+      new SendTaskFailureCommand({
+        error: "NoCourierAvailable",
+        cause: "No couriers are available",
+        taskToken: body.Token,
+      })
+    );
   }
 };
 
-module.exports.restoreQuantity = async ({ bookId, quantity }) => {
-  let params = {
-    TableName: "bookTable",
-    Key: { bookId: bookId },
+export const restoreQuantity = async ({ bookId, quantity }) => {
+  const params = {
+    TableName: BOOK_TABLE,
+    Key: { bookId: { S: bookId } },
     UpdateExpression: "set quantity = quantity + :orderQuantity",
     ExpressionAttributeValues: {
-      ":orderQuantity": quantity,
+      ":orderQuantity": { N: quantity.toString() },
     },
   };
-  await DocumentClient.update(params).promise();
+  await dynamoDBClient.send(new UpdateItemCommand(params));
   return "Quantity restored";
 };

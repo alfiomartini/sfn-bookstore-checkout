@@ -3,7 +3,7 @@ Transform: "AWS::Serverless-2016-10-31"
 Globals:
   Function:
     Runtime: nodejs20.x
-    CodeUri: src/handlers
+    CodeUri: dist/src
     Environment:
       Variables:
         BOOK_TABLE: !Ref BookTable

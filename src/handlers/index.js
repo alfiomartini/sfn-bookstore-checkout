@@ -32,6 +32,7 @@ export const checkInventory = async ({ bookId, quantity }) => {
     };
     const result = await dynamoDBClient.send(new QueryCommand(params));
     const book = result.Items[0];
+    console.log("checkInventory book: ", book);
 
     if (isBookAvailable(book, quantity)) {
       return book;
@@ -141,8 +142,9 @@ export const sqsWorker = async (event) => {
     console.log(JSON.stringify(event));
     const record = event.Records[0];
     const body = JSON.parse(record.body);
+    console.log("sqs worker body: ", body);
     /** Find a courier and attach courier information to the order */
-    const courier = "<courier email>";
+    const courier = "alfio.martini@encora.com";
 
     // update book quantity
     await updateBookQuantity(body.Input.bookId, body.Input.quantity);

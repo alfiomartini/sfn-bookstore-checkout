@@ -1,11 +1,12 @@
 {
-  "name": "stepfunctionsls",
+  "name": "sfn-store-checkout",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "prebuild": "rimraf dist",
-    "build": "node esbuild.config.js && sam build"
+    "build": "node esbuild.config.js && sam build",
+    "deploy": "./deploy.sh"
   },
   "keywords": [],
   "author": "",

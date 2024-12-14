@@ -1,5 +1,10 @@
 AWSTemplateFormatVersion: "2010-09-09"
 Transform: "AWS::Serverless-2016-10-31"
+Description: |
+  A serverless bookstore checkout application
+  to demonstrate the use of Step Functions.
+  This application includes various AWS services
+  such as Lambda, DynamoDB, SNS, SQS, and Step Functions.
 Globals:
   Function:
     Runtime: nodejs20.x
@@ -39,6 +44,10 @@ Resources:
       Policies:
         - DynamoDBReadPolicy:
             TableName: !Ref BookTable
+  CalculateTotalFunction:
+    Type: "AWS::Serverless::Function"
+    Properties:
+      Handler: index.calculateTotal
 
   DeductPointsFunction:
     Type: "AWS::Serverless::Function"
@@ -63,6 +72,11 @@ Resources:
       Policies:
         - DynamoDBReadPolicy:
             TableName: !Ref UserTable
+
+  BillCustomerFunction:
+    Type: "AWS::Serverless::Function"
+    Properties:
+      Handler: index.billCustomer
 
   RestoreRedeemPointsFunction:
     Type: "AWS::Serverless::Function"
@@ -97,9 +111,56 @@ Resources:
   NotifyCourierTopic:
     Type: "AWS::SNS::Topic"
 
+  StepFunctionsExecutionRole:
+    Type: "AWS::IAM::Role"
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: "Allow"
+            Principal:
+              Service: "states.amazonaws.com"
+            Action: "sts:AssumeRole"
+      Policies:
+        - PolicyName: "StepFunctionsExecutionPolicy"
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Effect: "Allow"
+                Action:
+                  - "dynamodb:GetItem"
+                  - "dynamodb:PutItem"
+                  - "dynamodb:UpdateItem"
+                  - "dynamodb:Query"
+                Resource:
+                  - !GetAtt BookTable.Arn
+                  - !GetAtt UserTable.Arn
+              - Effect: "Allow"
+                Action:
+                  - "sns:Publish"
+                Resource: !Ref NotifyCourierTopic
+              - Effect: "Allow"
+                Action:
+                  - "sqs:SendMessage"
+                Resource: !GetAtt OrdersQueue.Arn
+              - Effect: "Allow"
+                Action:
+                  - "lambda:InvokeFunction"
+                Resource:
+                  - !GetAtt CheckInventoryFunction.Arn
+                  - !GetAtt CalculateTotalFunction.Arn
+                  - !GetAtt DeductPointsFunction.Arn
+                  - !GetAtt UpdateBookQuantityFunction.Arn
+                  - !GetAtt RedeemPointsFunction.Arn
+                  - !GetAtt BillCustomerFunction.Arn
+                  - !GetAtt RestoreRedeemPointsFunction.Arn
+                  - !GetAtt RestoreQuantityFunction.Arn
+                  - !GetAtt SQSWorkerFunction.Arn
+
   StoreCheckoutFlowStateMachine:
     Type: "AWS::StepFunctions::StateMachine"
     Properties:
+      RoleArn: !GetAtt StepFunctionsExecutionRole.Arn
       Definition:
         StartAt: checkInventory
         States:
@@ -149,7 +210,7 @@ Resources:
             Type: Task
             Resource: arn:aws:states:::sqs:sendMessage.waitForTaskToken
             Parameters:
-              QueueUrl: https://sqs.us-east-1.amazonaws.com/<accountId>/OrdersQueue
+              QueueUrl: https://sqs.${AWS::Region}.amazonaws.com/${AWS::AccountId}/OrdersQueue
               MessageBody:
                 Input.$: "$"
                 Token.$: "$$.Task.Token"
@@ -163,7 +224,7 @@ Resources:
             Type: Task
             Resource: arn:aws:states:::sns:publish
             Parameters:
-              TopicArn: arn:aws:sns:us-east-1:<accountId>:NotifyCourier
+              TopicArn: arn:aws:sns:${AWS::Region}:${AWS::AccountId}:NotifyCourier
               Message.$: "$"
             Next: Dispatched
           Dispatched:

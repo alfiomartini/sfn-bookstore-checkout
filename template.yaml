@@ -18,6 +18,7 @@ Resources:
   BookTable:
     Type: "AWS::DynamoDB::Table"
     Properties:
+      TableName: "sfn-bookstore-checkout-BookTable"
       AttributeDefinitions:
         - AttributeName: bookid
           AttributeType: S
@@ -25,10 +26,19 @@ Resources:
         - AttributeName: bookid
           KeyType: HASH
       BillingMode: PAY_PER_REQUEST
+    Metadata:
+      Comment: |
+        The BookTable is expected to have the following attributes:
+        - bookid (String): Primary key
+        - title (String): Title of the book
+        - author (String): Author of the book
+        - price (Number): Price of the book
+        - quantity (Number): Quantity of the book in stock
 
   UserTable:
     Type: "AWS::DynamoDB::Table"
     Properties:
+      TableName: "sfn-bookstore-checkout-UserTable"
       AttributeDefinitions:
         - AttributeName: userid
           AttributeType: S
@@ -36,6 +46,12 @@ Resources:
         - AttributeName: userid
           KeyType: HASH
       BillingMode: PAY_PER_REQUEST
+    Metadata:
+      Comment: |
+        The UserTable is expected to have the following attributes:
+        - userid (String): Primary key
+        - name (String): Name of the user
+        - points (Number): Loyalty points of the use
 
   CheckInventoryFunction:
     Type: "AWS::Serverless::Function"

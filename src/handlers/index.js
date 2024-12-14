@@ -61,7 +61,7 @@ export const calculateTotal = async ({ book, quantity }) => {
 export const billCustomer = async (params) => {
   console.log(params);
   // throw 'Error in billing'
-  /* Bill the customer e.g. Using Stripe token from the paramerters */
+  /* Bill the customer e.g. Using Stripe token from the parameters */
   return "Successfully Billed";
 };
 

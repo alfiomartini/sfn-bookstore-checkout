@@ -20,16 +20,16 @@ Resources:
     Properties:
       TableName: "sfn-bookstore-checkout-BookTable"
       AttributeDefinitions:
-        - AttributeName: bookid
+        - AttributeName: bookId
           AttributeType: S
       KeySchema:
-        - AttributeName: bookid
+        - AttributeName: bookId
           KeyType: HASH
       BillingMode: PAY_PER_REQUEST
     Metadata:
       Comment: |
         The BookTable is expected to have the following attributes:
-        - bookid (String): Primary key
+        - bookId (String): Primary key
         - title (String): Title of the book
         - author (String): Author of the book
         - price (Number): Price of the book
@@ -40,16 +40,16 @@ Resources:
     Properties:
       TableName: "sfn-bookstore-checkout-UserTable"
       AttributeDefinitions:
-        - AttributeName: userid
+        - AttributeName: userId
           AttributeType: S
       KeySchema:
-        - AttributeName: userid
+        - AttributeName: userId
           KeyType: HASH
       BillingMode: PAY_PER_REQUEST
     Metadata:
       Comment: |
         The UserTable is expected to have the following attributes:
-        - userid (String): Primary key
+        - userId (String): Primary key
         - name (String): Name of the user
         - points (Number): Loyalty points of the use
 
@@ -114,6 +114,9 @@ Resources:
     Type: "AWS::Serverless::Function"
     Properties:
       Handler: index.sqsWorker
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: !Ref BookTable
       Events:
         SQSEvent:
           Type: SQS
@@ -226,7 +229,7 @@ Resources:
             Type: Task
             Resource: arn:aws:states:::sqs:sendMessage.waitForTaskToken
             Parameters:
-              QueueUrl: https://sqs.${AWS::Region}.amazonaws.com/${AWS::AccountId}/OrdersQueue
+              QueueUrl: !GetAtt OrdersQueue.QueueUrl
               MessageBody:
                 Input.$: "$"
                 Token.$: "$$.Task.Token"
@@ -240,7 +243,7 @@ Resources:
             Type: Task
             Resource: arn:aws:states:::sns:publish
             Parameters:
-              TopicArn: arn:aws:sns:${AWS::Region}:${AWS::AccountId}:NotifyCourier
+              TopicArn: !Ref NotifyCourierTopic
               Message.$: "$"
             Next: Dispatched
           Dispatched:

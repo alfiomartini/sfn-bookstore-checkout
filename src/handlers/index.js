@@ -1,5 +1,5 @@
 import {
-  StepFunctionsClient,
+  SFNClient,
   SendTaskSuccessCommand,
   SendTaskFailureCommand,
 } from "@aws-sdk/client-sfn";
@@ -11,17 +11,18 @@ import {
 } from "@aws-sdk/client-dynamodb";
 
 const region = process.env.AWS_REGION || "us-east-1";
-const stepFunctionsClient = new StepFunctionsClient({ region });
+const stepFunctionsClient = new SFNClient({ region });
 const dynamoDBClient = new DynamoDBClient({ region });
 
 const USER_TABLE = process.env.USER_TABLE || "";
 const BOOK_TABLE = process.env.BOOK_TABLE || "";
 
 const isBookAvailable = (book, quantity) => {
-  return book.quantity - quantity > 0;
+  return Number(book.quantity.N) - quantity > 0;
 };
 
 export const checkInventory = async ({ bookId, quantity }) => {
+  console.log("bookId, quantity: ", bookId, quantity);
   try {
     const params = {
       TableName: BOOK_TABLE,
@@ -42,6 +43,7 @@ export const checkInventory = async ({ bookId, quantity }) => {
       throw bookOutOfStockError;
     }
   } catch (e) {
+    console.log("error: ", e);
     if (e.name === "BookOutOfStock") {
       throw e;
     } else {
@@ -54,7 +56,7 @@ export const checkInventory = async ({ bookId, quantity }) => {
 
 export const calculateTotal = async ({ book, quantity }) => {
   console.log("book: ", book);
-  const total = book.price * quantity;
+  const total = Number(book.price.N) * quantity;
   return { total };
 };
 
@@ -141,6 +143,7 @@ export const sqsWorker = async (event) => {
   try {
     console.log(JSON.stringify(event));
     const record = event.Records[0];
+    console.log("record: ", record);
     const body = JSON.parse(record.body);
     console.log("sqs worker body: ", body);
     /** Find a courier and attach courier information to the order */

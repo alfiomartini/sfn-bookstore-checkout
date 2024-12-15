@@ -10,9 +10,12 @@ import {
   GetItemCommand,
 } from "@aws-sdk/client-dynamodb";
 
+import { SQSClient, DeleteMessageCommand } from "@aws-sdk/client-sqs";
+
 const region = process.env.AWS_REGION || "us-east-1";
 const stepFunctionsClient = new SFNClient({ region });
 const dynamoDBClient = new DynamoDBClient({ region });
+const sqsClient = new SQSClient({ region });
 
 const USER_TABLE = process.env.USER_TABLE || "";
 const BOOK_TABLE = process.env.BOOK_TABLE || "";
@@ -141,18 +144,22 @@ export const restoreRedeemPoints = async ({ userId, total }) => {
 
 export const sqsWorker = async (event) => {
   try {
-    console.log(JSON.stringify(event));
     const record = event.Records[0];
-    console.log("record: ", record);
+
     const body = JSON.parse(record.body);
+    const receiptHandle = record.receiptHandle;
+    const queueUrl = record.eventSourceARN.split(":")[5];
+
+    console.log("record: ", record);
     console.log("sqs worker body: ", body);
+    console.log("receiptHandle: ", receiptHandle);
+    console.log("queueUrl: ", queueUrl);
+
     /** Find a courier and attach courier information to the order */
     const courier = "alfio.martini@encora.com";
 
-    // update book quantity
+    // Update book quantity
     await updateBookQuantity(body.Input.bookId, body.Input.quantity);
-
-    // throw "Something wrong with Courier API";
 
     // Attach courier information to the order
     await stepFunctionsClient.send(
@@ -161,9 +168,20 @@ export const sqsWorker = async (event) => {
         taskToken: body.Token,
       })
     );
+
+    return { courier };
+    // Delete the message from the queue
+    await sqsClient.send(
+      new DeleteMessageCommand({
+        QueueUrl: queueUrl,
+        ReceiptHandle: receiptHandle,
+      })
+    );
   } catch (e) {
     console.log("===== You got an Error =====");
     console.log(e);
+    const record = event.Records[0];
+    const body = JSON.parse(record.body);
     await stepFunctionsClient.send(
       new SendTaskFailureCommand({
         error: "NoCourierAvailable",
@@ -171,6 +189,7 @@ export const sqsWorker = async (event) => {
         taskToken: body.Token,
       })
     );
+    return "No couriers available";
   }
 };
 

@@ -117,6 +117,12 @@ Resources:
       Policies:
         - DynamoDBCrudPolicy:
             TableName: !Ref BookTable
+        - Statement:
+            Effect: Allow
+            Action:
+              - "states:SendTaskSuccess"
+              - "states:SendTaskFailure"
+            Resource: "*"
       Events:
         SQSEvent:
           Type: SQS

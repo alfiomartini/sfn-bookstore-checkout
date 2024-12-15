@@ -21,7 +21,7 @@ const USER_TABLE = process.env.USER_TABLE || "";
 const BOOK_TABLE = process.env.BOOK_TABLE || "";
 
 const isBookAvailable = (book, quantity) => {
-  return Number(book.quantity.N) - quantity > 0;
+  return Number(book.quantity.N) - quantity >= 0;
 };
 
 export const checkInventory = async ({ bookId, quantity }) => {
@@ -70,13 +70,13 @@ export const billCustomer = async (params) => {
   return "Successfully Billed";
 };
 
-const deductPoints = async (userId) => {
+const deductPoints = async (userId, remaining = 0) => {
   const params = {
     TableName: USER_TABLE,
     Key: { userId: { S: userId } },
-    UpdateExpression: "set points = :zero",
+    UpdateExpression: "set points = :remaining",
     ExpressionAttributeValues: {
-      ":zero": { N: "0" },
+      ":remaining": { N: remaining.toString() },
     },
   };
   await dynamoDBClient.send(new UpdateItemCommand(params));
@@ -109,15 +109,22 @@ export const redeemPoints = async ({ userId, total }) => {
     };
     const result = await dynamoDBClient.send(new GetItemCommand(params));
     const user = result.Item;
-    console.log("user: ", user);
     const points = user.points.N;
+
+    console.log("user: ", user);
     console.log("points: ", points);
-    if (orderTotal > points) {
+
+    // redeem all points
+    if (orderTotal >= points) {
       await deductPoints(userId);
       orderTotal = orderTotal - points;
-      return { total: orderTotal, points };
+      return { total: orderTotal, pointsUsed: points };
     } else {
-      throw new Error("Order total is less than redeem points");
+      //redeem part of the points
+      const pointsUsed = Math.floor(orderTotal);
+      await deductPoints(userId, points - pointsUsed);
+      orderTotal = 0;
+      return { total: orderTotal, pointsUsed: pointsUsed };
     }
   } catch (e) {
     throw new Error(e);

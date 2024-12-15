@@ -22,4 +22,5 @@ sam deploy \
   --s3-bucket "$S3_BUCKET" \
   --capabilities CAPABILITY_IAM \
   --region "$AWS_REGION" \
+  --parameter-overrides CourierEmail=alfio.martini@encora.com \
   --profile default

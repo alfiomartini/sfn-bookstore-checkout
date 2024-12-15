@@ -5,6 +5,12 @@ Description: |
   to demonstrate the use of Step Functions.
   This application includes various AWS services
   such as Lambda, DynamoDB, SNS, SQS, and Step Functions.
+
+Parameters:
+  CourierEmail:
+    Type: String
+    Description: "The email address to subscribe to the NotifyCourierTopic"
+
 Globals:
   Function:
     Runtime: nodejs20.x
@@ -15,6 +21,16 @@ Globals:
         USER_TABLE: !Ref UserTable
 
 Resources:
+  OrdersQueue:
+    Type: "AWS::SQS::Queue"
+
+  NotifyCourierTopic:
+    Type: "AWS::SNS::Topic"
+    Properties:
+      Subscription:
+        - Protocol: "email"
+          Endpoint: !Ref CourierEmail
+
   BookTable:
     Type: "AWS::DynamoDB::Table"
     Properties:
@@ -86,7 +102,7 @@ Resources:
     Properties:
       Handler: index.redeemPoints
       Policies:
-        - DynamoDBReadPolicy:
+        - DynamoDBCrudPolicy:
             TableName: !Ref UserTable
 
   BillCustomerFunction:
@@ -129,12 +145,6 @@ Resources:
           Properties:
             Queue: !GetAtt OrdersQueue.Arn
             BatchSize: 1
-
-  OrdersQueue:
-    Type: "AWS::SQS::Queue"
-
-  NotifyCourierTopic:
-    Type: "AWS::SNS::Topic"
 
   StepFunctionsExecutionRole:
     Type: "AWS::IAM::Role"
@@ -239,7 +249,7 @@ Resources:
               MessageBody:
                 Input.$: "$"
                 Token.$: "$$.Task.Token"
-            ResultPath: "$.courierStatus"
+            ResultPath: "$.courierInfo"
             Catch:
               - ErrorEquals: [NoCourierAvailable]
                 ResultPath: "$.courierError"
@@ -251,6 +261,9 @@ Resources:
             Parameters:
               TopicArn: !Ref NotifyCourierTopic
               Message.$: "$"
+            ResultSelector:
+              dispatchedMessage: true
+            ResultPath: "$.dispatched"
             Next: Dispatched
           Dispatched:
             Type: Pass

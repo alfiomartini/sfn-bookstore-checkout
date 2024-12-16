@@ -118,13 +118,21 @@ export const redeemPoints = async ({ userId, total }) => {
     if (orderTotal >= points) {
       await deductPoints(userId);
       orderTotal = orderTotal - points;
-      return { total: orderTotal, pointsUsed: points };
+      return {
+        total: orderTotal,
+        pointsUsed: points,
+        pointsBeforeRedeem: points,
+      };
     } else {
       //redeem part of the points
       const pointsUsed = Math.floor(orderTotal);
       await deductPoints(userId, points - pointsUsed);
       orderTotal = 0;
-      return { total: orderTotal, pointsUsed: pointsUsed };
+      return {
+        total: orderTotal,
+        pointsUsed: pointsUsed,
+        pointsBeforeRedeem: points,
+      };
     }
   } catch (e) {
     throw new Error(e);
@@ -133,13 +141,13 @@ export const redeemPoints = async ({ userId, total }) => {
 
 export const restoreRedeemPoints = async ({ userId, total }) => {
   try {
-    if (total.points) {
+    if (total.pointsBeforeRedeem) {
       const params = {
         TableName: USER_TABLE,
         Key: { userId: { S: userId } },
         UpdateExpression: "set points = :points",
         ExpressionAttributeValues: {
-          ":points": { N: total.points.toString() },
+          ":points": { N: total.pointsBeforeRedeem.toString() },
         },
       };
       await dynamoDBClient.send(new UpdateItemCommand(params));
@@ -162,11 +170,18 @@ export const sqsWorker = async (event) => {
     console.log("receiptHandle: ", receiptHandle);
     console.log("queueUrl: ", queueUrl);
 
+    // Update book quantity
+    await updateBookQuantity(body.Input.bookId, body.Input.quantity);
+
     /** Find a courier and attach courier information to the order */
     const courier = "alfio.martini@encora.com";
 
-    // Update book quantity
-    await updateBookQuantity(body.Input.bookId, body.Input.quantity);
+    // throw "Something wrong with Courier API";
+    // const noCourierAvailableError = new Error(
+    //   "Something wrong with Courier API"
+    // );
+    // noCourierAvailableError.name = "NoCourierAvailable";
+    // throw noCourierAvailableError;
 
     // Attach courier information to the order
     await stepFunctionsClient.send(

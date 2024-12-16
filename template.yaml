@@ -23,10 +23,13 @@ Globals:
 Resources:
   OrdersQueue:
     Type: "AWS::SQS::Queue"
+    Properties:
+      QueueName: "sfn-bookstore-checkout-OrdersQueue"
 
   NotifyCourierTopic:
     Type: "AWS::SNS::Topic"
     Properties:
+      TopicName: "sfn-bookstore-checkout-NotifyCourierTopic"
       Subscription:
         - Protocol: "email"
           Endpoint: !Ref CourierEmail
@@ -72,6 +75,7 @@ Resources:
   CheckInventoryFunction:
     Type: "AWS::Serverless::Function"
     Properties:
+      FunctionName: "sfn-bookstore-checkout-CheckInventoryFunction"
       Handler: index.checkInventory
       Policies:
         - DynamoDBReadPolicy:
@@ -79,11 +83,13 @@ Resources:
   CalculateTotalFunction:
     Type: "AWS::Serverless::Function"
     Properties:
+      FunctionName: "sfn-bookstore-checkout-CalculateTotalFunction"
       Handler: index.calculateTotal
 
   DeductPointsFunction:
     Type: "AWS::Serverless::Function"
     Properties:
+      FunctionName: "sfn-bookstore-checkout-DeductPointsFunction"
       Handler: index.deductPoints
       Policies:
         - DynamoDBCrudPolicy:
@@ -92,6 +98,7 @@ Resources:
   UpdateBookQuantityFunction:
     Type: "AWS::Serverless::Function"
     Properties:
+      FunctionName: "sfn-bookstore-checkout-UpdateBookQuantityFunction"
       Handler: index.updateBookQuantity
       Policies:
         - DynamoDBCrudPolicy:
@@ -100,6 +107,7 @@ Resources:
   RedeemPointsFunction:
     Type: "AWS::Serverless::Function"
     Properties:
+      FunctionName: "sfn-bookstore-checkout-RedeemPointsFunction"
       Handler: index.redeemPoints
       Policies:
         - DynamoDBCrudPolicy:
@@ -108,11 +116,13 @@ Resources:
   BillCustomerFunction:
     Type: "AWS::Serverless::Function"
     Properties:
+      FunctionName: "sfn-bookstore-checkout-BillCustomerFunction"
       Handler: index.billCustomer
 
   RestoreRedeemPointsFunction:
     Type: "AWS::Serverless::Function"
     Properties:
+      FunctionName: "sfn-bookstore-checkout-RestoreRedeemPointsFunction"
       Handler: index.restoreRedeemPoints
       Policies:
         - DynamoDBCrudPolicy:
@@ -121,6 +131,7 @@ Resources:
   RestoreQuantityFunction:
     Type: "AWS::Serverless::Function"
     Properties:
+      FunctionName: "sfn-bookstore-checkout-RestoreQuantityFunction"
       Handler: index.restoreQuantity
       Policies:
         - DynamoDBCrudPolicy:
@@ -129,6 +140,7 @@ Resources:
   SQSWorkerFunction:
     Type: "AWS::Serverless::Function"
     Properties:
+      FunctionName: "sfn-bookstore-checkout-SQSWorkerFunction"
       Handler: index.sqsWorker
       Policies:
         - DynamoDBCrudPolicy:
@@ -195,6 +207,7 @@ Resources:
   StoreCheckoutFlowStateMachine:
     Type: "AWS::StepFunctions::StateMachine"
     Properties:
+      StateMachineName: "sfn-bookstore-checkout-StoreCheckoutFlowStateMachine"
       RoleArn: !GetAtt StepFunctionsExecutionRole.Arn
       Definition:
         StartAt: checkInventory

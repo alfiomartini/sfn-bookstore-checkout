@@ -1,0 +1,68 @@
+- Happy Path - redeem false - must have at least 5 units in the corresponding book
+{
+  "bookId": "2",
+  "userId": "2",
+  "quantity": 5,
+  "redeem": false
+}
+
+-  Happy Path - redeem true - must have at least 45 points in the corresponding book
+
+{
+  "bookId": "2",
+  "userId": "2",
+  "quantity": 5,
+  "redeem": true
+}
+
+-- camunda entry
+{
+  "input": {
+    "bookId": "2",
+    "userId": "2",
+    "quantity": 5,
+    "redeem": false
+  },
+  "correlationId": "1234-abcd"
+}
+
+ 
+
+-- BookNotFound Error
+
+{
+  "bookId": "8",
+  "userId": "2",
+  "quantity": 5,
+  "redeem": false
+}
+
+-- camunda entry
+{
+  "input": {
+    "bookId": "8",
+	"userId": "2",
+	"quantity": 5,
+	"redeem": false
+  },
+  "correlationId": "1234-abcd"
+}
+
+-- BookOutOfStock Error
+
+{
+  "input": {
+    "bookId": "2",
+	"userId": "2",
+	"quantity": 5000,
+	"redeem": false
+  },
+  "correlationId": "1234-abcd"
+}
+
+{
+  "bookId": "2",
+  "userId": "2",
+  "quantity": 500,
+  "redeem": false
+}

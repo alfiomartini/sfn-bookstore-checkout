@@ -1,0 +1,403 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:zeebe="http://camunda.org/schema/zeebe/1.0" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Web Modeler" exporterVersion="c5a792d" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.6.0">
+  <bpmn:process id="Process_05bsdne" name="camunda-bookstore-checkout" isExecutable="true">
+    <bpmn:serviceTask id="Activity_1ng3bt4" name="Bill Customer" zeebe:modelerTemplate="io.camunda.connectors.AWSLAMBDA.v2" zeebe:modelerTemplateVersion="5" zeebe:modelerTemplateIcon="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0nMTgnIGhlaWdodD0nMTgnIHZpZXdCb3g9JzAgMCA0OCA0OCcgdmVyc2lvbj0nMS4xJyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnCiAgICAgeG1sbnM6eGxpbms9J2h0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsnPgogICAgPHRpdGxlPkljb24tUmVzb3VyY2UvQ29tcHV0ZS9SZXNfQW1hem9uLUxhbWJkYV9MYW1iZGEtRnVuY3Rpb25fNDhfTGlnaHQ8L3RpdGxlPgogICAgPGcgaWQ9J0ljb24tUmVzb3VyY2UvQ29tcHV0ZS9SZXNfQW1hem9uLUxhbWJkYV9MYW1iZGEtRnVuY3Rpb25fNDgnIHN0cm9rZT0nbm9uZScgc3Ryb2tlLXdpZHRoPScxJyBmaWxsPSdub25lJwogICAgICAgZmlsbC1ydWxlPSdldmVub2RkJz4KICAgICAgICA8cGF0aCBkPSdNMjQsNDQgQzEyLjk3Miw0NCA0LDM1LjAyOCA0LDI0IEM0LDEyLjk3MiAxMi45NzIsNCAyNCw0IEMzNS4wMjgsNCA0NCwxMi45NzIgNDQsMjQgQzQ0LDM1LjAyOCAzNS4wMjgsNDQgMjQsNDQgTDI0LDQ0IFogTTI0LDIgQzExLjg2OSwyIDIsMTEuODY5IDIsMjQgQzIsMzYuMTMxIDExLjg2OSw0NiAyNCw0NiBDMzYuMTMxLDQ2IDQ2LDM2LjEzMSA0NiwyNCBDNDYsMTEuODY5IDM2LjEzMSwyIDI0LDIgTDI0LDIgWiBNMTcuMjMxLDM1LjI1IEwxMS44NzYsMzUuMjUgTDE4LjIyMSwyMS45NTkgTDIwLjkwMiwyNy40OTIgTDE3LjIzMSwzNS4yNSBaIE0xOS4xMTQsMTkuMjE1IEMxOC45NDYsMTguODcgMTguNTk3LDE4LjY1MSAxOC4yMTQsMTguNjUxIEwxOC4yMTEsMTguNjUxIEMxNy44MjYsMTguNjUyIDE3LjQ3NywxOC44NzQgMTcuMzEyLDE5LjIyMSBMOS4zODksMzUuODE5IEM5LjI0LDM2LjEyOSA5LjI2MiwzNi40OTMgOS40NDUsMzYuNzgzIEM5LjYyOCwzNy4wNzQgOS45NDcsMzcuMjUgMTAuMjkxLDM3LjI1IEwxNy44NjQsMzcuMjUgQzE4LjI1MSwzNy4yNSAxOC42MDMsMzcuMDI3IDE4Ljc2OSwzNi42NzggTDIyLjkxNSwyNy45MTUgQzIzLjA0NCwyNy42NDIgMjMuMDQzLDI3LjMyMyAyMi45MTEsMjcuMDUxIEwxOS4xMTQsMTkuMjE1IFogTTM2LjEyNSwzNS4yNSBMMzAuNjczLDM1LjI1IEwyMC43NjEsMTMuOTUzIEMyMC41OTcsMTMuNjAxIDIwLjI0MywxMy4zNzUgMTkuODU0LDEzLjM3NSBMMTYuMjUxLDEzLjM3NSBMMTYuMjU1LDkuMjUgTDIzLjQ3NSw5LjI1IEwzMy4zMzksMzAuNTQ1IEMzMy41MDMsMzAuODk4IDMzLjg1NiwzMS4xMjUgMzQuMjQ2LDMxLjEyNSBMMzYuMTI1LDMxLjEyNSBMMzYuMTI1LDM1LjI1IFogTTM3LjEyNSwyOS4xMjUgTDM0Ljg4NSwyOS4xMjUgTDI1LjAyMSw3LjgzIEMyNC44NTYsNy40NzcgMjQuNTAzLDcuMjUgMjQuMTEzLDcuMjUgTDE1LjI1Niw3LjI1IEMxNC43MDQsNy4yNSAxNC4yNTcsNy42OTcgMTQuMjU2LDguMjQ5IEwxNC4yNSwxNC4zNzQgQzE0LjI1LDE0LjY0IDE0LjM1NSwxNC44OTQgMTQuNTQzLDE1LjA4MiBDMTQuNzMsMTUuMjcgMTQuOTg0LDE1LjM3NSAxNS4yNSwxNS4zNzUgTDE5LjIxNywxNS4zNzUgTDI5LjEyOSwzNi42NzIgQzI5LjI5MywzNy4wMjQgMjkuNjQ2LDM3LjI1IDMwLjAzNSwzNy4yNSBMMzcuMTI1LDM3LjI1IEMzNy42NzgsMzcuMjUgMzguMTI1LDM2LjgwMyAzOC4xMjUsMzYuMjUgTDM4LjEyNSwzMC4xMjUgQzM4LjEyNSwyOS41NzIgMzcuNjc4LDI5LjEyNSAzNy4xMjUsMjkuMTI1IEwzNy4xMjUsMjkuMTI1IFonCiAgICAgICAgICAgICAgaWQ9J0FtYXpvbi1MYW1iZGEtTGFtYmRhLUZ1bmN0aW9uX1Jlc291cmNlLUljb25fbGlnaHQtYmcnIGZpbGw9JyNENDVCMDcnPjwvcGF0aD4KICAgIDwvZz4KPC9zdmc+">
+      <bpmn:extensionElements>
+        <zeebe:taskDefinition type="io.camunda:aws-lambda:1" retries="3" />
+        <zeebe:ioMapping>
+          <zeebe:input source="credentials" target="authentication.type" />
+          <zeebe:input source="{{secrets.ALFIO_AWS_ACCESS_KEY_ID}}" target="authentication.accessKey" />
+          <zeebe:input source="{{secrets.ALFIO_AWS_SECRET_ACCESS_KEY}}" target="authentication.secretKey" />
+          <zeebe:input source="us-east-1" target="configuration.region" />
+          <zeebe:input source="sync" target="awsFunction.operationType" />
+          <zeebe:input source="arn:aws:lambda:us-east-1:590183882432:function:sfn-bookstore-checkout-BillCustomerFunction" target="awsFunction.functionName" />
+          <zeebe:input source="combined" target="awsFunction.payload" />
+        </zeebe:ioMapping>
+        <zeebe:taskHeaders>
+          <zeebe:header key="resultVariable" value="respBillCust" />
+          <zeebe:header key="resultExpression" value="=response" />
+          <zeebe:header key="retryBackoff" value="PT0S" />
+        </zeebe:taskHeaders>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_070ny66</bpmn:incoming>
+      <bpmn:outgoing>Flow_0xjkbt6</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="Activity_0hvb78p" name="CalculateTotal" zeebe:modelerTemplate="io.camunda.connectors.AWSLAMBDA.v2" zeebe:modelerTemplateVersion="5" zeebe:modelerTemplateIcon="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0nMTgnIGhlaWdodD0nMTgnIHZpZXdCb3g9JzAgMCA0OCA0OCcgdmVyc2lvbj0nMS4xJyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnCiAgICAgeG1sbnM6eGxpbms9J2h0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsnPgogICAgPHRpdGxlPkljb24tUmVzb3VyY2UvQ29tcHV0ZS9SZXNfQW1hem9uLUxhbWJkYV9MYW1iZGEtRnVuY3Rpb25fNDhfTGlnaHQ8L3RpdGxlPgogICAgPGcgaWQ9J0ljb24tUmVzb3VyY2UvQ29tcHV0ZS9SZXNfQW1hem9uLUxhbWJkYV9MYW1iZGEtRnVuY3Rpb25fNDgnIHN0cm9rZT0nbm9uZScgc3Ryb2tlLXdpZHRoPScxJyBmaWxsPSdub25lJwogICAgICAgZmlsbC1ydWxlPSdldmVub2RkJz4KICAgICAgICA8cGF0aCBkPSdNMjQsNDQgQzEyLjk3Miw0NCA0LDM1LjAyOCA0LDI0IEM0LDEyLjk3MiAxMi45NzIsNCAyNCw0IEMzNS4wMjgsNCA0NCwxMi45NzIgNDQsMjQgQzQ0LDM1LjAyOCAzNS4wMjgsNDQgMjQsNDQgTDI0LDQ0IFogTTI0LDIgQzExLjg2OSwyIDIsMTEuODY5IDIsMjQgQzIsMzYuMTMxIDExLjg2OSw0NiAyNCw0NiBDMzYuMTMxLDQ2IDQ2LDM2LjEzMSA0NiwyNCBDNDYsMTEuODY5IDM2LjEzMSwyIDI0LDIgTDI0LDIgWiBNMTcuMjMxLDM1LjI1IEwxMS44NzYsMzUuMjUgTDE4LjIyMSwyMS45NTkgTDIwLjkwMiwyNy40OTIgTDE3LjIzMSwzNS4yNSBaIE0xOS4xMTQsMTkuMjE1IEMxOC45NDYsMTguODcgMTguNTk3LDE4LjY1MSAxOC4yMTQsMTguNjUxIEwxOC4yMTEsMTguNjUxIEMxNy44MjYsMTguNjUyIDE3LjQ3NywxOC44NzQgMTcuMzEyLDE5LjIyMSBMOS4zODksMzUuODE5IEM5LjI0LDM2LjEyOSA5LjI2MiwzNi40OTMgOS40NDUsMzYuNzgzIEM5LjYyOCwzNy4wNzQgOS45NDcsMzcuMjUgMTAuMjkxLDM3LjI1IEwxNy44NjQsMzcuMjUgQzE4LjI1MSwzNy4yNSAxOC42MDMsMzcuMDI3IDE4Ljc2OSwzNi42NzggTDIyLjkxNSwyNy45MTUgQzIzLjA0NCwyNy42NDIgMjMuMDQzLDI3LjMyMyAyMi45MTEsMjcuMDUxIEwxOS4xMTQsMTkuMjE1IFogTTM2LjEyNSwzNS4yNSBMMzAuNjczLDM1LjI1IEwyMC43NjEsMTMuOTUzIEMyMC41OTcsMTMuNjAxIDIwLjI0MywxMy4zNzUgMTkuODU0LDEzLjM3NSBMMTYuMjUxLDEzLjM3NSBMMTYuMjU1LDkuMjUgTDIzLjQ3NSw5LjI1IEwzMy4zMzksMzAuNTQ1IEMzMy41MDMsMzAuODk4IDMzLjg1NiwzMS4xMjUgMzQuMjQ2LDMxLjEyNSBMMzYuMTI1LDMxLjEyNSBMMzYuMTI1LDM1LjI1IFogTTM3LjEyNSwyOS4xMjUgTDM0Ljg4NSwyOS4xMjUgTDI1LjAyMSw3LjgzIEMyNC44NTYsNy40NzcgMjQuNTAzLDcuMjUgMjQuMTEzLDcuMjUgTDE1LjI1Niw3LjI1IEMxNC43MDQsNy4yNSAxNC4yNTcsNy42OTcgMTQuMjU2LDguMjQ5IEwxNC4yNSwxNC4zNzQgQzE0LjI1LDE0LjY0IDE0LjM1NSwxNC44OTQgMTQuNTQzLDE1LjA4MiBDMTQuNzMsMTUuMjcgMTQuOTg0LDE1LjM3NSAxNS4yNSwxNS4zNzUgTDE5LjIxNywxNS4zNzUgTDI5LjEyOSwzNi42NzIgQzI5LjI5MywzNy4wMjQgMjkuNjQ2LDM3LjI1IDMwLjAzNSwzNy4yNSBMMzcuMTI1LDM3LjI1IEMzNy42NzgsMzcuMjUgMzguMTI1LDM2LjgwMyAzOC4xMjUsMzYuMjUgTDM4LjEyNSwzMC4xMjUgQzM4LjEyNSwyOS41NzIgMzcuNjc4LDI5LjEyNSAzNy4xMjUsMjkuMTI1IEwzNy4xMjUsMjkuMTI1IFonCiAgICAgICAgICAgICAgaWQ9J0FtYXpvbi1MYW1iZGEtTGFtYmRhLUZ1bmN0aW9uX1Jlc291cmNlLUljb25fbGlnaHQtYmcnIGZpbGw9JyNENDVCMDcnPjwvcGF0aD4KICAgIDwvZz4KPC9zdmc+">
+      <bpmn:extensionElements>
+        <zeebe:taskDefinition type="io.camunda:aws-lambda:1" retries="3" />
+        <zeebe:ioMapping>
+          <zeebe:input source="credentials" target="authentication.type" />
+          <zeebe:input source="{{secrets.ALFIO_AWS_ACCESS_KEY_ID}}" target="authentication.accessKey" />
+          <zeebe:input source="{{secrets.ALFIO_AWS_SECRET_ACCESS_KEY}}" target="authentication.secretKey" />
+          <zeebe:input source="us-east-1" target="configuration.region" />
+          <zeebe:input source="sync" target="awsFunction.operationType" />
+          <zeebe:input source="arn:aws:lambda:us-east-1:590183882432:function:sfn-bookstore-checkout-CalculateTotalFunction" target="awsFunction.functionName" />
+          <zeebe:input source="=combined" target="awsFunction.payload" />
+        </zeebe:ioMapping>
+        <zeebe:taskHeaders>
+          <zeebe:header key="resultVariable" value="respCalcTotal" />
+          <zeebe:header key="resultExpression" value="=response" />
+          <zeebe:header key="retryBackoff" value="PT0S" />
+        </zeebe:taskHeaders>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0sgw0uv</bpmn:incoming>
+      <bpmn:outgoing>Flow_1lg2xhb</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:task id="Activity_1bsw5ay" name="Check Inventory Failed">
+      <bpmn:incoming>Flow_1dfz38c</bpmn:incoming>
+      <bpmn:outgoing>Flow_1a7d72f</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:endEvent id="Event_0eb4aeq" name="CheckInv Failed">
+      <bpmn:incoming>Flow_1a7d72f</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:serviceTask id="Activity_0eddp81" name="CheckInventory" zeebe:modelerTemplate="io.camunda.connectors.AWSLAMBDA.v2" zeebe:modelerTemplateVersion="5" zeebe:modelerTemplateIcon="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0nMTgnIGhlaWdodD0nMTgnIHZpZXdCb3g9JzAgMCA0OCA0OCcgdmVyc2lvbj0nMS4xJyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnCiAgICAgeG1sbnM6eGxpbms9J2h0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsnPgogICAgPHRpdGxlPkljb24tUmVzb3VyY2UvQ29tcHV0ZS9SZXNfQW1hem9uLUxhbWJkYV9MYW1iZGEtRnVuY3Rpb25fNDhfTGlnaHQ8L3RpdGxlPgogICAgPGcgaWQ9J0ljb24tUmVzb3VyY2UvQ29tcHV0ZS9SZXNfQW1hem9uLUxhbWJkYV9MYW1iZGEtRnVuY3Rpb25fNDgnIHN0cm9rZT0nbm9uZScgc3Ryb2tlLXdpZHRoPScxJyBmaWxsPSdub25lJwogICAgICAgZmlsbC1ydWxlPSdldmVub2RkJz4KICAgICAgICA8cGF0aCBkPSdNMjQsNDQgQzEyLjk3Miw0NCA0LDM1LjAyOCA0LDI0IEM0LDEyLjk3MiAxMi45NzIsNCAyNCw0IEMzNS4wMjgsNCA0NCwxMi45NzIgNDQsMjQgQzQ0LDM1LjAyOCAzNS4wMjgsNDQgMjQsNDQgTDI0LDQ0IFogTTI0LDIgQzExLjg2OSwyIDIsMTEuODY5IDIsMjQgQzIsMzYuMTMxIDExLjg2OSw0NiAyNCw0NiBDMzYuMTMxLDQ2IDQ2LDM2LjEzMSA0NiwyNCBDNDYsMTEuODY5IDM2LjEzMSwyIDI0LDIgTDI0LDIgWiBNMTcuMjMxLDM1LjI1IEwxMS44NzYsMzUuMjUgTDE4LjIyMSwyMS45NTkgTDIwLjkwMiwyNy40OTIgTDE3LjIzMSwzNS4yNSBaIE0xOS4xMTQsMTkuMjE1IEMxOC45NDYsMTguODcgMTguNTk3LDE4LjY1MSAxOC4yMTQsMTguNjUxIEwxOC4yMTEsMTguNjUxIEMxNy44MjYsMTguNjUyIDE3LjQ3NywxOC44NzQgMTcuMzEyLDE5LjIyMSBMOS4zODksMzUuODE5IEM5LjI0LDM2LjEyOSA5LjI2MiwzNi40OTMgOS40NDUsMzYuNzgzIEM5LjYyOCwzNy4wNzQgOS45NDcsMzcuMjUgMTAuMjkxLDM3LjI1IEwxNy44NjQsMzcuMjUgQzE4LjI1MSwzNy4yNSAxOC42MDMsMzcuMDI3IDE4Ljc2OSwzNi42NzggTDIyLjkxNSwyNy45MTUgQzIzLjA0NCwyNy42NDIgMjMuMDQzLDI3LjMyMyAyMi45MTEsMjcuMDUxIEwxOS4xMTQsMTkuMjE1IFogTTM2LjEyNSwzNS4yNSBMMzAuNjczLDM1LjI1IEwyMC43NjEsMTMuOTUzIEMyMC41OTcsMTMuNjAxIDIwLjI0MywxMy4zNzUgMTkuODU0LDEzLjM3NSBMMTYuMjUxLDEzLjM3NSBMMTYuMjU1LDkuMjUgTDIzLjQ3NSw5LjI1IEwzMy4zMzksMzAuNTQ1IEMzMy41MDMsMzAuODk4IDMzLjg1NiwzMS4xMjUgMzQuMjQ2LDMxLjEyNSBMMzYuMTI1LDMxLjEyNSBMMzYuMTI1LDM1LjI1IFogTTM3LjEyNSwyOS4xMjUgTDM0Ljg4NSwyOS4xMjUgTDI1LjAyMSw3LjgzIEMyNC44NTYsNy40NzcgMjQuNTAzLDcuMjUgMjQuMTEzLDcuMjUgTDE1LjI1Niw3LjI1IEMxNC43MDQsNy4yNSAxNC4yNTcsNy42OTcgMTQuMjU2LDguMjQ5IEwxNC4yNSwxNC4zNzQgQzE0LjI1LDE0LjY0IDE0LjM1NSwxNC44OTQgMTQuNTQzLDE1LjA4MiBDMTQuNzMsMTUuMjcgMTQuOTg0LDE1LjM3NSAxNS4yNSwxNS4zNzUgTDE5LjIxNywxNS4zNzUgTDI5LjEyOSwzNi42NzIgQzI5LjI5MywzNy4wMjQgMjkuNjQ2LDM3LjI1IDMwLjAzNSwzNy4yNSBMMzcuMTI1LDM3LjI1IEMzNy42NzgsMzcuMjUgMzguMTI1LDM2LjgwMyAzOC4xMjUsMzYuMjUgTDM4LjEyNSwzMC4xMjUgQzM4LjEyNSwyOS41NzIgMzcuNjc4LDI5LjEyNSAzNy4xMjUsMjkuMTI1IEwzNy4xMjUsMjkuMTI1IFonCiAgICAgICAgICAgICAgaWQ9J0FtYXpvbi1MYW1iZGEtTGFtYmRhLUZ1bmN0aW9uX1Jlc291cmNlLUljb25fbGlnaHQtYmcnIGZpbGw9JyNENDVCMDcnPjwvcGF0aD4KICAgIDwvZz4KPC9zdmc+">
+      <bpmn:extensionElements>
+        <zeebe:taskDefinition type="io.camunda:aws-lambda:1" retries="3" />
+        <zeebe:ioMapping>
+          <zeebe:input source="credentials" target="authentication.type" />
+          <zeebe:input source="{{secrets.ALFIO_AWS_ACCESS_KEY_ID}}" target="authentication.accessKey" />
+          <zeebe:input source="{{secrets.ALFIO_AWS_SECRET_ACCESS_KEY}}" target="authentication.secretKey" />
+          <zeebe:input source="us-east-1" target="configuration.region" />
+          <zeebe:input source="sync" target="awsFunction.operationType" />
+          <zeebe:input source="arn:aws:lambda:us-east-1:590183882432:function:sfn-bookstore-checkout-CheckInventoryFunction" target="awsFunction.functionName" />
+          <zeebe:input source="=input" target="awsFunction.payload" />
+        </zeebe:ioMapping>
+        <zeebe:taskHeaders>
+          <zeebe:header key="resultVariable" value="respCheckInv" />
+          <zeebe:header key="resultExpression" value="=response" />
+          <zeebe:header key="errorExpression" value="=if is defined(response.payload.errorType)&#10;then bpmnError(response.payload.errorType,&#34;CheckInvFailed&#34;, {errorCode: response.payload.errorType, success:false})&#10;else null" />
+          <zeebe:header key="retryBackoff" value="PT0S" />
+        </zeebe:taskHeaders>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_19pfw3w</bpmn:incoming>
+      <bpmn:outgoing>Flow_18c43bn</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:scriptTask id="Activity_1vxnu22" name="Compose Input 1">
+      <bpmn:extensionElements>
+        <zeebe:script expression="={&#10;  &#34;bookId&#34;: input.bookId,&#10;  &#34;userId&#34;: input.userId,&#10;  &#34;quantity&#34;: input.quantity,&#10;  &#34;redeem&#34;: input.redeem,&#10;  &#34;book&#34;: respCheckInv.payload&#10;}" resultVariable="combined" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_18c43bn</bpmn:incoming>
+      <bpmn:outgoing>Flow_0sgw0uv</bpmn:outgoing>
+    </bpmn:scriptTask>
+    <bpmn:scriptTask id="Activity_1j8lo66" name="Compose Input 2">
+      <bpmn:extensionElements>
+        <zeebe:script expression="={&#10;  &#34;bookId&#34;: input.bookId,&#10;  &#34;userId&#34;: input.userId,&#10;  &#34;quantity&#34;: input.quantity,&#10;  &#34;redeem&#34;: input.redeem,&#10;  &#34;total&#34;: respCalcTotal.payload&#10;}" resultVariable="combined" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1lg2xhb</bpmn:incoming>
+      <bpmn:outgoing>Flow_1x8869y</bpmn:outgoing>
+    </bpmn:scriptTask>
+    <bpmn:scriptTask id="Activity_1rjggg2" name="Compose Input 3">
+      <bpmn:extensionElements>
+        <zeebe:script expression="={&#10;  &#34;bookId&#34;: input.bookId,&#10;  &#34;userId&#34;: input.userId,&#10;  &#34;quantity&#34;: input.quantity,&#10;  &#34;redeem&#34;: input.redeem,&#10;  &#34;total&#34;: respRedeemPoints.payload&#10;}" resultVariable="combined" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_053uax8</bpmn:incoming>
+      <bpmn:outgoing>Flow_1onpdz9</bpmn:outgoing>
+    </bpmn:scriptTask>
+    <bpmn:serviceTask id="Activity_14ia8v4" name="Dispatch Order" zeebe:modelerTemplate="io.camunda.connectors.AWSSNS.v1" zeebe:modelerTemplateVersion="7" zeebe:modelerTemplateIcon="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0nMTgnIGhlaWdodD0nMTgnIHZpZXdCb3g9JzAgMCA4MCA4MCcgdmVyc2lvbj0nMS4xJyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnCiAgICAgeG1sbnM6eGxpbms9J2h0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsnPjwhLS0gR2VuZXJhdG9yOiBTa2V0Y2ggNjQgKDkzNTM3KSAtIGh0dHBzOi8vc2tldGNoLmNvbSAtLT4KICAgIDx0aXRsZT5JY29uLUFyY2hpdGVjdHVyZS82NC9BcmNoX0FXUy1TaW1wbGUtTm90aWZpY2F0aW9uLVNlcnZpY2VfNjQ8L3RpdGxlPgogICAgPGRlc2M+Q3JlYXRlZCB3aXRoIFNrZXRjaC48L2Rlc2M+CiAgICA8ZGVmcz4KICAgICAgICA8bGluZWFyR3JhZGllbnQgeDE9JzAlJyB5MT0nMTAwJScgeDI9JzEwMCUnIHkyPScwJScgaWQ9J2xpbmVhckdyYWRpZW50LTEnPgogICAgICAgICAgICA8c3RvcCBzdG9wLWNvbG9yPScjQjAwODREJyBvZmZzZXQ9JzAlJz48L3N0b3A+CiAgICAgICAgICAgIDxzdG9wIHN0b3AtY29sb3I9JyNGRjRGOEInIG9mZnNldD0nMTAwJSc+PC9zdG9wPgogICAgICAgIDwvbGluZWFyR3JhZGllbnQ+CiAgICA8L2RlZnM+CiAgICA8ZyBpZD0nSWNvbi1BcmNoaXRlY3R1cmUvNjQvQXJjaF9BV1MtU2ltcGxlLU5vdGlmaWNhdGlvbi1TZXJ2aWNlXzY0JyBzdHJva2U9J25vbmUnIHN0cm9rZS13aWR0aD0nMScgZmlsbD0nbm9uZScKICAgICAgIGZpbGwtcnVsZT0nZXZlbm9kZCc+CiAgICAgICAgPGcgaWQ9J0ljb24tQXJjaGl0ZWN0dXJlLUJHLzY0L0FwcGxpY2F0aW9uLUludGVncmF0aW9uJyBmaWxsPSd1cmwoI2xpbmVhckdyYWRpZW50LTEpJz4KICAgICAgICAgICAgPHJlY3QgaWQ9J1JlY3RhbmdsZScgeD0nMCcgeT0nMCcgd2lkdGg9JzgwJyBoZWlnaHQ9JzgwJz48L3JlY3Q+CiAgICAgICAgPC9nPgogICAgICAgIDxwYXRoIGQ9J00xNywzOCBDMTguMTAzLDM4IDE5LDM4Ljg5NyAxOSw0MCBDMTksNDEuMTAzIDE4LjEwMyw0MiAxNyw0MiBDMTUuODk3LDQyIDE1LDQxLjEwMyAxNSw0MCBDMTUsMzguODk3IDE1Ljg5NywzOCAxNywzOCBMMTcsMzggWiBNNDEsNjQgQzI5LjMxNCw2NCAxOS4yODksNTUuNDY2IDE3LjE5NCw0My45OCBDMTguOTY1LDQzLjg5NCAyMC40MjcsNDIuNjU5IDIwLjg1Nyw0MSBMMjcsNDEgTDI3LDM5IEwyMC44NTcsMzkgQzIwLjQyNywzNy4zNDIgMTguOTY2LDM2LjEwNyAxNy4xOTUsMzYuMDIgQzE5LjI4NSwyNC43MSAyOS41MTEsMTYgNDEsMTYgQzQ1LjMxMywxNiA0OS44MzIsMTcuNjIyIDU0LjQyOSwyMC44MjEgTDU1LjU3MSwxOS4xNzkgQzUwLjYzMywxNS43NDMgNDUuNzMsMTQgNDEsMTQgQzI4LjI3LDE0IDE2Ljk0OSwyMy44NjUgMTUuMDYzLDM2LjUyMSBDMTMuODM5LDM3LjIwNyAxMywzOC41IDEzLDQwIEMxMyw0MS41IDEzLjgzOSw0Mi43OTMgMTUuMDYzLDQzLjQ3OCBDMTYuOTcsNTYuMzQxIDI4LjA1Niw2NiA0MSw2NiBDNDYuNDA3LDY2IDUxLjk0Miw2NC4xNTcgNTYuNTg1LDYwLjgxMSBMNTUuNDE1LDU5LjE4OSBDNTEuMTEsNjIuMjkyIDQ1Ljk5MSw2NCA0MSw2NCBMNDEsNjQgWiBNMzAuMTAxLDM2LjQ0MiBDMzEuOTU1LDM2Ljg5NSAzNC4yNzUsMzcgMzYsMzcgQzM3LjY0MiwzNyAzOS44MjMsMzYuOTA1IDQxLjYyOSwzNi41MDYgTDM3LjEwNSw0NS41NTMgQzM3LjAzNiw0NS42OTEgMzcsNDUuODQ1IDM3LDQ2IEwzNyw1MC40NTMgQzM2LjE5OSw1MC45NjQgMzQuODMzLDUxLjgxMiAzNCw1MS45ODYgTDM0LDQ2IEMzNCw0NS44NjggMzMuOTc0LDQ1LjczNyAzMy45MjMsNDUuNjE1IEwzMC4xMDEsMzYuNDQyIFogTTM2LDMzIEM0MC4wMjUsMzMgNDIuMTc0LDMzLjYwNCA0Mi44NDEsMzQgQzQyLjE3NCwzNC4zOTYgNDAuMDI1LDM1IDM2LDM1IEMzMS45NzUsMzUgMjkuODI2LDM0LjM5NiAyOS4xNTksMzQgQzI5LjgyNiwzMy42MDQgMzEuOTc1LDMzIDM2LDMzIEwzNiwzMyBaIE0zMyw1NCBMMzQsNTQgQzM0LjA0Myw1NCAzNC4wODYsNTMuOTk3IDM0LjEyOCw1My45OTIgQzM1LjM1Miw1My44MzMgMzYuOTA5LDUyLjg4NyAzOC4yNzIsNTIuMDEzIEwzOC41MzUsNTEuODQ1IEMzOC44MjQsNTEuNjYxIDM5LDUxLjM0MiAzOSw1MSBMMzksNDYuMjM2IEw0NC41NTksMzUuMTIgQzQ0LjgzMywzNC44MDEgNDUsMzQuNDM0IDQ1LDM0IEM0NSwzMS4zOSAzOS4zNjEsMzEgMzYsMzEgQzMyLjYzOSwzMSAyNywzMS4zOSAyNywzNCBDMjcsMzQuMzY2IDI3LjEyLDM0LjY4NCAyNy4zMiwzNC45NjcgTDMyLDQ2LjIgTDMyLDUzIEMzMiw1My41NTIgMzIuNDQ3LDU0IDMzLDU0IEwzMyw1NCBaIE02Miw1MyBDNjMuMTAzLDUzIDY0LDUzLjg5NyA2NCw1NSBDNjQsNTYuMTAzIDYzLjEwMyw1NyA2Miw1NyBDNjAuODk3LDU3IDYwLDU2LjEwMyA2MCw1NSBDNjAsNTMuODk3IDYwLjg5Nyw1MyA2Miw1MyBMNjIsNTMgWiBNNjIsMjMgQzYzLjEwMywyMyA2NCwyMy44OTcgNjQsMjUgQzY0LDI2LjEwMyA2My4xMDMsMjcgNjIsMjcgQzYwLjg5NywyNyA2MCwyNi4xMDMgNjAsMjUgQzYwLDIzLjg5NyA2MC44OTcsMjMgNjIsMjMgTDYyLDIzIFogTTY0LDM4IEM2NS4xMDMsMzggNjYsMzguODk3IDY2LDQwIEM2Niw0MS4xMDMgNjUuMTAzLDQyIDY0LDQyIEM2Mi44OTcsNDIgNjIsNDEuMTAzIDYyLDQwIEM2MiwzOC44OTcgNjIuODk3LDM4IDY0LDM4IEw2NCwzOCBaIE01NCw0MSBMNjAuMTQzLDQxIEM2MC41ODksNDIuNzIgNjIuMTQyLDQ0IDY0LDQ0IEM2Ni4yMDYsNDQgNjgsNDIuMjA2IDY4LDQwIEM2OCwzNy43OTQgNjYuMjA2LDM2IDY0LDM2IEM2Mi4xNDIsMzYgNjAuNTg5LDM3LjI4IDYwLjE0MywzOSBMNTQsMzkgTDU0LDI2IEw1OC4xNDMsMjYgQzU4LjU4OSwyNy43MiA2MC4xNDIsMjkgNjIsMjkgQzY0LjIwNiwyOSA2NiwyNy4yMDYgNjYsMjUgQzY2LDIyLjc5NCA2NC4yMDYsMjEgNjIsMjEgQzYwLjE0MiwyMSA1OC41ODksMjIuMjggNTguMTQzLDI0IEw1MywyNCBDNTIuNDQ3LDI0IDUyLDI0LjQ0OCA1MiwyNSBMNTIsMzkgTDQ1LDM5IEw0NSw0MSBMNTIsNDEgTDUyLDU1IEM1Miw1NS41NTIgNTIuNDQ3LDU2IDUzLDU2IEw1OC4xNDMsNTYgQzU4LjU4OSw1Ny43MiA2MC4xNDIsNTkgNjIsNTkgQzY0LjIwNiw1OSA2Niw1Ny4yMDYgNjYsNTUgQzY2LDUyLjc5NCA2NC4yMDYsNTEgNjIsNTEgQzYwLjE0Miw1MSA1OC41ODksNTIuMjggNTguMTQzLDU0IEw1NCw1NCBMNTQsNDEgWicKICAgICAgICAgICAgICBpZD0nQVdTLVNpbXBsZS1Ob3RpZmljYXRpb24tU2VydmljZV9JY29uXzY0X1NxdWlkJyBmaWxsPScjRkZGRkZGJz48L3BhdGg+CiAgICA8L2c+Cjwvc3ZnPg==">
+      <bpmn:extensionElements>
+        <zeebe:taskDefinition type="io.camunda:aws-sns:1" retries="3" />
+        <zeebe:ioMapping>
+          <zeebe:input source="credentials" target="authentication.type" />
+          <zeebe:input source="{{secrets.ALFIO_AWS_ACCESS_KEY_ID}}" target="authentication.accessKey" />
+          <zeebe:input source="{{secrets.ALFIO_AWS_SECRET_ACCESS_KEY}}" target="authentication.secretKey" />
+          <zeebe:input source="arn:aws:sns:us-east-1:590183882432:sfn-bookstore-checkout-NotifyCourierTopic" target="topic.topicArn" />
+          <zeebe:input source="standard" target="topic.type" />
+          <zeebe:input source="us-east-1" target="configuration.region" />
+          <zeebe:input source="Courier Message" target="topic.subject" />
+          <zeebe:input source="Your order will be dispatched in 24 hours" target="topic.message" />
+        </zeebe:ioMapping>
+        <zeebe:taskHeaders>
+          <zeebe:header key="resultVariable" value="resultSNS" />
+          <zeebe:header key="resultExpression" value="=response" />
+          <zeebe:header key="retryBackoff" value="PT0S" />
+        </zeebe:taskHeaders>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1wospbf</bpmn:incoming>
+      <bpmn:outgoing>Flow_0776odf</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:endEvent id="Event_09mkd4j" name="End">
+      <bpmn:incoming>Flow_0776odf</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:boundaryEvent id="Event_1lqkln9" name="Exception Caught" attachedToRef="Activity_0eddp81">
+      <bpmn:extensionElements>
+        <zeebe:ioMapping>
+          <zeebe:output source="=errorCode" target="errorCode" />
+          <zeebe:output source="=success" target="success" />
+        </zeebe:ioMapping>
+      </bpmn:extensionElements>
+      <bpmn:outgoing>Flow_1dfz38c</bpmn:outgoing>
+      <bpmn:errorEventDefinition id="ErrorEventDefinition_1lcbuhe" />
+    </bpmn:boundaryEvent>
+    <bpmn:sequenceFlow id="Flow_053uax8" sourceRef="Activity_1a1dowg" targetRef="Activity_1rjggg2" />
+    <bpmn:sequenceFlow id="Flow_070ny66" sourceRef="Gateway_1tq6j26" targetRef="Activity_1ng3bt4" />
+    <bpmn:sequenceFlow id="Flow_0776odf" sourceRef="Activity_14ia8v4" targetRef="Event_09mkd4j" />
+    <bpmn:sequenceFlow id="Flow_0sgw0uv" sourceRef="Activity_1vxnu22" targetRef="Activity_0hvb78p" />
+    <bpmn:sequenceFlow id="Flow_0xjkbt6" sourceRef="Activity_1ng3bt4" targetRef="Activity_17zhrxk" />
+    <bpmn:sequenceFlow id="Flow_14vtb4x" sourceRef="Activity_17zhrxk" targetRef="Activity_1r6jm12" />
+    <bpmn:sequenceFlow id="Flow_18c43bn" sourceRef="Activity_0eddp81" targetRef="Activity_1vxnu22" />
+    <bpmn:sequenceFlow id="Flow_19pfw3w" sourceRef="StartEvent_1" targetRef="Activity_0eddp81" />
+    <bpmn:sequenceFlow id="Flow_1a7d72f" sourceRef="Activity_1bsw5ay" targetRef="Event_0eb4aeq" />
+    <bpmn:sequenceFlow id="Flow_1dfz38c" sourceRef="Event_1lqkln9" targetRef="Activity_1bsw5ay" />
+    <bpmn:sequenceFlow id="Flow_1leg9bl" sourceRef="Activity_1r6jm12" targetRef="webhook-prepare-order" />
+    <bpmn:sequenceFlow id="Flow_1lg2xhb" sourceRef="Activity_0hvb78p" targetRef="Activity_1j8lo66" />
+    <bpmn:sequenceFlow id="Flow_1onpdz9" sourceRef="Activity_1rjggg2" targetRef="Gateway_1tq6j26" />
+    <bpmn:sequenceFlow id="Flow_1wospbf" sourceRef="webhook-prepare-order" targetRef="Activity_14ia8v4" />
+    <bpmn:sequenceFlow id="Flow_1x8869y" sourceRef="Activity_1j8lo66" targetRef="Gateway_0mgkxm9" />
+    <bpmn:exclusiveGateway id="Gateway_1tq6j26">
+      <bpmn:incoming>Flow_1onpdz9</bpmn:incoming>
+      <bpmn:incoming>Flow_1ebkpkn</bpmn:incoming>
+      <bpmn:outgoing>Flow_070ny66</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:scriptTask id="Activity_17zhrxk" name="Prepare MessageBody">
+      <bpmn:extensionElements>
+        <zeebe:script expression="={&#10;  &#34;messageBody&#34;: {&#10;    &#34;Input&#34;: {&#10;       &#34;bookId&#34;: input.bookId,&#10;       &#34;userId&#34;: input.userId,&#10;       &#34;quantity&#34;: input.quantity,&#10;       &#34;redeem&#34;: input.redeem&#10;    },&#10;    &#34;correlationId&#34;: correlationId&#10;  }&#10;}" resultVariable="prepareBody" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0xjkbt6</bpmn:incoming>
+      <bpmn:outgoing>Flow_14vtb4x</bpmn:outgoing>
+    </bpmn:scriptTask>
+    <bpmn:serviceTask id="Activity_1r6jm12" name="PrepareOrder" zeebe:modelerTemplate="io.camunda.connectors.AWSSQS.v1" zeebe:modelerTemplateVersion="10" zeebe:modelerTemplateIcon="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0nMTgnIGhlaWdodD0nMTgnIHZpZXdCb3g9JzAgMCA0MCA0MCcgdmVyc2lvbj0nMS4xJyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnCiAgICAgeG1sbnM6eGxpbms9J2h0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsnPjwhLS0gR2VuZXJhdG9yOiBTa2V0Y2ggNjQgKDkzNTM3KSAtIGh0dHBzOi8vc2tldGNoLmNvbSAtLT4KICAgIDx0aXRsZT5JY29uLUFyY2hpdGVjdHVyZS8zMi9BcmNoX0FXUy1TaW1wbGUtUXVldWUtU2VydmljZV8zMjwvdGl0bGU+CiAgICA8ZGVzYz5DcmVhdGVkIHdpdGggU2tldGNoLjwvZGVzYz4KICAgIDxkZWZzPgogICAgICAgIDxsaW5lYXJHcmFkaWVudCB4MT0nMCUnIHkxPScxMDAlJyB4Mj0nMTAwJScgeTI9JzAlJyBpZD0nbGluZWFyR3JhZGllbnQtMSc+CiAgICAgICAgICAgIDxzdG9wIHN0b3AtY29sb3I9JyNCMDA4NEQnIG9mZnNldD0nMCUnPjwvc3RvcD4KICAgICAgICAgICAgPHN0b3Agc3RvcC1jb2xvcj0nI0ZGNEY4Qicgb2Zmc2V0PScxMDAlJz48L3N0b3A+CiAgICAgICAgPC9saW5lYXJHcmFkaWVudD4KICAgIDwvZGVmcz4KICAgIDxnIGlkPSdJY29uLUFyY2hpdGVjdHVyZS8zMi9BcmNoX0FXUy1TaW1wbGUtUXVldWUtU2VydmljZV8zMicgc3Ryb2tlPSdub25lJyBzdHJva2Utd2lkdGg9JzEnIGZpbGw9J25vbmUnCiAgICAgICBmaWxsLXJ1bGU9J2V2ZW5vZGQnPgogICAgICAgIDxnIGlkPSdJY29uLUFyY2hpdGVjdHVyZS1CRy8zMi9BcHBsaWNhdGlvbi1JbnRlZ3JhdGlvbicgZmlsbD0ndXJsKCNsaW5lYXJHcmFkaWVudC0xKSc+CiAgICAgICAgICAgIDxyZWN0IGlkPSdSZWN0YW5nbGUnIHg9JzAnIHk9JzAnIHdpZHRoPSc0MCcgaGVpZ2h0PSc0MCc+PC9yZWN0PgogICAgICAgIDwvZz4KICAgICAgICA8cGF0aCBkPSdNMTQuMzQyMjA1MSwyMi4zNDkzNzg2IEwxNS44NDY2NzY3LDIwLjkwNjEwNzQgQzE1Ljk0MjgzNDcsMjAuODE0MTUzOSAxNS45OTY5MjM1LDIwLjY4NzIxOCAxNS45OTk5Mjg1LDIwLjU1NTI4NDYgQzE2LjAwMTkzMTcsMjAuNDIyMzUxNyAxNS45NTE4NDk1LDIwLjI5MzQxNjggMTUuODU5Njk4MSwyMC4xOTg0NjQ4IEwxNC4zNTUyMjY0LDE4LjY0MzI1MDIgTDEzLjYzNTA0MzMsMTkuMzM3ODk5NCBMMTQuMzExMTU0LDIwLjAzNzU0NiBMMTEuOTkxMzQyOSwyMC4wMzc1NDYgTDExLjk5MTM0MjksMjEuMDM3MDQxMyBMMTQuMjY1MDc4MywyMS4wMzcwNDEzIEwxMy42NDgwNjQ3LDIxLjYyODc0MjUgTDE0LjM0MjIwNTEsMjIuMzQ5Mzc4NiBaIE0yNi4zNTc5NDUyLDIyLjM1MzM3NjUgTDI3LjkwNzQ5MDksMjAuOTAwMTEwNCBDMjguMDA2NjUzOCwyMC44MDgxNTY5IDI4LjA2Mjc0NTksMjAuNjc5MjIyIDI4LjA2NDc0OTIsMjAuNTQ0MjkwMSBDMjguMDY2NzUyNSwyMC40MDkzNTgzIDI4LjAxMzY2NTMsMjAuMjc4NDI0NCAyNy45MTg1MDksMjAuMTgzNDcyNCBMMjYuMzY4OTYzMywxOC42MzcyNTMyIEwyNS42NjA3OTk5LDE5LjM0Mzg5NjMgTDI2LjM1NDk0MDMsMjAuMDM3NTQ2IEwyNC4wMTEwODk2LDIwLjAzNzU0NiBMMjQuMDExMDg5NiwyMS4wMzcwNDEzIEwyNi4yOTg4NDgxLDIxLjAzNzA0MTMgTDI1LjY3MTgxOCwyMS42MjQ3NDQ1IEwyNi4zNTc5NDUyLDIyLjM1MzM3NjUgWiBNMTcuNTg3NTM2NywyMy4zNjA4Njc4IEMxOC4zMzg3NzA4LDIzLjA1NzAyMTIgMTkuMTYyMTIzNSwyMi44OTQxMDM1IDIwLjAwNDUwNzQsMjIuODk0MTAzNSBDMjAuODQ2ODkxMywyMi44OTQxMDM1IDIxLjY3MDI0NCwyMy4wNTcwMjEyIDIyLjQyMTQ3ODEsMjMuMzYwODY3OCBDMjEuNzUyMzc4OSwyMS41ODk3NjIyIDIxLjc1MjM3ODksMTkuMzg5ODczMSAyMi40MjE0NzgxLDE3LjYxODc2NzUgQzIwLjkxOTAwOTgsMTguMjI2NDYwNiAxOS4wOTAwMDUsMTguMjI2NDYwNiAxNy41ODc1MzY3LDE3LjYxODc2NzUgQzE4LjI1NjYzNTksMTkuMzg5ODczMSAxOC4yNTY2MzU5LDIxLjU4OTc2MjIgMTcuNTg3NTM2NywyMy4zNjA4Njc4IEwxNy41ODc1MzY3LDIzLjM2MDg2NzggWiBNMTUuNjQ0MzQ0MywyNS4zNDA4Njc5IEMxNS41NDYxODMsMjUuMjQzOTE2OCAxNS40OTcxMDI0LDI1LjExNTk4MTQgMTUuNDk3MTAyNCwyNC45ODgwNDYgQzE1LjQ5NzEwMjQsMjQuODYwMTEwNiAxNS41NDYxODMsMjQuNzMyMTc1MyAxNS42NDQzNDQzLDI0LjYzNDIyNDcgQzE3LjU4NDUzMTcsMjIuNjk4MjAyNCAxNy41ODQ1MzE3LDE4LjI4MjQzMjQgMTUuNjQ0MzQ0MywxNi4zNDU0MTA2IEMxNS41NDYxODMsMTYuMjQ4NDU5NSAxNS40OTcxMDI0LDE2LjEyMDUyNDEgMTUuNDk3MTAyNCwxNS45OTI1OTEyIEMxNS40OTcxMDI0LDE1Ljg2NDY1MzQgMTUuNTQ2MTgzLDE1LjczNjcxOCAxNS42NDQzNDQzLDE1LjYzODc2NzQgQzE1LjgzOTY2NTIsMTUuNDQzODY1OSAxNi4xNTcxODY4LDE1LjQ0Mzg2NTkgMTYuMzUyNTA3NywxNS42Mzg3Njc0IEMxNy4yNzQwMjE2LDE2LjU1ODMwMzEgMTguNjA1MjA4NiwxNy4wODYwMzY2IDIwLjAwNDUwNzQsMTcuMDg2MDM2NiBDMjEuNDA0ODA3OSwxNy4wODYwMzY2IDIyLjczNTk5NDgsMTYuNTU4MzAzMSAyMy42NTc1MDg4LDE1LjYzODc2NzQgQzIzLjg1MjgyOTYsMTUuNDQzODY1OSAyNC4xNzAzNTEzLDE1LjQ0Mzg2NTkgMjQuMzY1NjcyMiwxNS42Mzg3Njc0IEMyNC40NjI4MzE4LDE1LjczNjcxOCAyNC41MTE5MTI0LDE1Ljg2NDY1MzQgMjQuNTExOTEyNCwxNS45OTI1OTEyIEMyNC41MTE5MTI0LDE2LjEyMDUyNDEgMjQuNDYyODMxOCwxNi4yNDg0NTk1IDI0LjM2NTY3MjIsMTYuMzQ1NDEwNiBDMjIuNDI0NDgzMSwxOC4yODI0MzI0IDIyLjQyNDQ4MzEsMjIuNjk4MjAyNCAyNC4zNjU2NzIyLDI0LjYzNDIyNDcgQzI0LjQ2MjgzMTgsMjQuNzMyMTc1MyAyNC41MTE5MTI0LDI0Ljg2MDExMDYgMjQuNTExOTEyNCwyNC45ODgwNDYgQzI0LjUxMTkxMjQsMjUuMTE1OTgxNCAyNC40NjI4MzE4LDI1LjI0MzkxNjggMjQuMzY1NjcyMiwyNS4zNDA4Njc5IEMyNC4yNjc1MTA5LDI1LjQzODgxODQgMjQuMTM5MzAwMywyNS40ODc3OTM3IDI0LjAxMTA4OTYsMjUuNDg3NzkzNyBDMjMuODgyODc5LDI1LjQ4Nzc5MzcgMjMuNzU0NjY4NCwyNS40Mzg4MTg0IDIzLjY1NzUwODgsMjUuMzQwODY3OSBDMjIuNzM1OTk0OCwyNC40MjEzMzIyIDIxLjQwNDgwNzksMjMuODkzNTk4NyAyMC4wMDQ1MDc0LDIzLjg5MzU5ODcgQzE4LjYwNTIwODYsMjMuODkzNTk4NyAxNy4yNzQwMjE2LDI0LjQyMTMzMjIgMTYuMzUyNTA3NywyNS4zNDA4Njc5IEMxNi4xNTcxODY4LDI1LjUzNTc2OTQgMTUuODM5NjY1MiwyNS41MzU3Njk0IDE1LjY0NDM0NDMsMjUuMzQwODY3OSBMMTUuNjQ0MzQ0MywyNS4zNDA4Njc5IFogTTMyLjU0MjEwNDksMTkuNDM1ODQ5OSBDMzIuMjM2NjAzLDE5LjEzMjAwMzMgMzEuODM2OTQ2NCwxOC45ODAwODAxIDMxLjQzNjI4ODIsMTguOTgwMDgwMSBDMzEuMDM2NjMxNiwxOC45ODAwODAxIDMwLjYzNjk3NSwxOS4xMzIwMDMzIDMwLjMzMTQ3MzEsMTkuNDM1ODQ5OSBDMjkuNzIxNDcxLDIwLjA0NDU0MjUgMjkuNzIxNDcxLDIxLjAzNDA0MjggMzAuMzMxNDczMSwyMS42NDE3MzU5IEMzMC45NDE0NzUzLDIyLjI1MDQyODUgMzEuOTMyMTAyNywyMi4yNTA0Mjg1IDMyLjU0MjEwNDksMjEuNjQxNzM1OSBDMzMuMTUxMTA1NCwyMS4wMzQwNDI4IDMzLjE1MTEwNTQsMjAuMDQ0NTQyNSAzMi41NDIxMDQ5LDE5LjQzNTg0OTkgTDMyLjU0MjEwNDksMTkuNDM1ODQ5OSBaIE0zMy4yNTAyNjgzLDIyLjM0OTM3ODYgQzMyLjc1MDQ0NzIsMjIuODQ4MTI2NyAzMi4wOTMzNjc3LDIzLjA5ODAwMDUgMzEuNDM2Mjg4MiwyMy4wOTgwMDA1IEMzMC43ODAyMTAzLDIzLjA5ODAwMDUgMzAuMTIzMTMwOSwyMi44NDgxMjY3IDI5LjYyMzMwOTcsMjIuMzQ5Mzc4NiBDMjguNjIzNjY3NSwyMS4zNTA4ODI4IDI4LjYyMzY2NzUsMTkuNzI3NzAyNSAyOS42MjMzMDk3LDE4LjcyOTIwNjggQzMwLjYyMjk1MiwxNy43MzE3MTA1IDMyLjI1MDYyNiwxNy43MzE3MTA1IDMzLjI1MDI2ODMsMTguNzI5MjA2OCBDMzQuMjQ5OTEwNiwxOS43Mjc3MDI1IDM0LjI0OTkxMDYsMjEuMzUwODgyOCAzMy4yNTAyNjgzLDIyLjM0OTM3ODYgTDMzLjI1MDI2ODMsMjIuMzQ5Mzc4NiBaIE05LjY2ODUyNjg3LDE5LjQ0Njg0NDMgQzkuMzYzMDI0OTcsMTkuMTQyOTk3OCA4Ljk2MzM2ODM5LDE4Ljk5MTA3NDUgOC41NjI3MTAxNywxOC45OTEwNzQ1IEM4LjE2MzA1MzU5LDE4Ljk5MTA3NDUgNy43NjMzOTcwMSwxOS4xNDI5OTc4IDcuNDU3ODk1MTEsMTkuNDQ2ODQ0MyBDNi44NDg4OTQ2MSwyMC4wNTU1MzcgNi44NDg4OTQ2MSwyMS4wNDUwMzczIDcuNDU3ODk1MTEsMjEuNjUyNzMwNCBDOC4wNjc4OTcyNiwyMi4yNjE0MjMgOS4wNTg1MjQ3MiwyMi4yNjE0MjMgOS42Njg1MjY4NywyMS42NTI3MzA0IEMxMC4yNzc1Mjc0LDIxLjA0NTAzNzMgMTAuMjc3NTI3NCwyMC4wNTU1MzcgOS42Njg1MjY4NywxOS40NDY4NDQzIEw5LjY2ODUyNjg3LDE5LjQ0Njg0NDMgWiBNMTAuMzc2NjkwMywyMi4zNTkzNzM1IEM5Ljg3Njg2OTE0LDIyLjg1ODEyMTcgOS4yMTk3ODk2NSwyMy4xMDc5OTU1IDguNTYyNzEwMTcsMjMuMTA3OTk1NSBDNy45MDY2MzIzMiwyMy4xMDc5OTU1IDcuMjQ5NTUyODQsMjIuODU4MTIxNyA2Ljc0OTczMTcsMjIuMzU5MzczNSBDNS43NTAwODk0MywyMS4zNjE4NzczIDUuNzUwMDg5NDMsMTkuNzM4Njk3IDYuNzQ5NzMxNywxOC43NDAyMDEyIEM3Ljc0OTM3Mzk3LDE3Ljc0MjcwNDkgOS4zNzcwNDgwMSwxNy43NDI3MDQ5IDEwLjM3NjY5MDMsMTguNzQwMjAxMiBDMTEuMzc2MzMyNSwxOS43Mzg2OTcgMTEuMzc2MzMyNSwyMS4zNjE4NzczIDEwLjM3NjY5MDMsMjIuMzU5MzczNSBMMTAuMzc2NjkwMywyMi4zNTkzNzM1IFogTTI3LjQzMzcxMjUsMjguOTEwMDY1NCBDMjUuNDM2NDMxMywzMC45MDMwNTkgMjIuNzgyMDcwNSwzMi4wMDA1MDQ3IDE5Ljk1NzQzMDEsMzIuMDAwNTA0NyBDMTcuMTMyNzg5NiwzMi4wMDA1MDQ3IDE0LjQ3ODQyODgsMzAuOTAzMDU5IDEyLjQ4MjE0OTIsMjguOTEwMDY1NCBDMTEuMTY1OTg3LDI3LjU5NzcyODEgMTAuNDA3NzQxMywyNi40NjkyOTggOS45NDQ5ODEwNCwyNS4xMzU5NzEzIEw4Ljk5ODQyNTk5LDI1LjQ2MjgwNjMgQzkuNTA3MjYxOTMsMjYuOTI5MDY1OCAxMC4zNjI2NjcyLDI4LjIxMDQxODcgMTEuNzczOTg1OCwyOS42MTY3MDg2IEMxMy45NTg1NzQ4LDMxLjc5ODYwNjcgMTYuODY2MzUxOSwzMyAxOS45NTc0MzAxLDMzIEMyMy4wNDk1MDk5LDMzIDI1Ljk1NjI4NTMsMzEuNzk4NjA2NyAyOC4xNDE4NzU5LDI5LjYxNjcwODYgQzI5LjI4Mjc1MDIsMjguNDc4MjgzNSAzMC40MjA2MTk2LDI3LjE4NjkzNTYgMzEuMDExNTkwNSwyNS40NjA4MDczIEwzMC4wNjQwMzM4LDI1LjEzNzk3MDMgQzI5LjUzOTE3MTUsMjYuNjcwMTk2NiAyOC40ODk0NDY5LDI3Ljg1NjU5NzQgMjcuNDMzNzEyNSwyOC45MTAwNjU0IEwyNy40MzM3MTI1LDI4LjkxMDA2NTQgWiBNOS45NDQ5ODEwNCwxNS44NTk2NTU5IEw4Ljk5ODQyNTk5LDE1LjUzMTgyMTQgQzkuNTEwMjY2ODcsMTQuMDY0NTYyNCAxMC4zNjU2NzIyLDEyLjc4MzIwOTUgMTEuNzc1OTg5MSwxMS4zNzU5MjAyIEMxNi4yODYzOTkxLDYuODc1MTkzMDQgMjMuNjI2NDU3OCw2Ljg3NDE5MzU0IDI4LjEzNzg2OTQsMTEuMzc1OTIwMiBDMjkuMjE4NjQ0OSwxMi40NTMzNzYxIDMwLjQwMzU5MTYsMTMuNzg5NzAxMiAzMS4wMTE1OTA1LDE1LjUzMTgyMTQgTDMwLjA2NDAzMzgsMTUuODU5NjU1OSBDMjkuNTI0MTQ2OCwxNC4zMDk0Mzg3IDI4LjQyOTM0ODIsMTMuMDgwMDU5NiAyNy40Mjk3MDU5LDEyLjA4MjU2MzMgQzI1LjQzNDQyOCwxMC4wOTE1Njg4IDIyLjc4MTA2ODksOC45OTYxMjE5NyAxOS45NTc0MzAxLDguOTk2MTIxOTcgQzE3LjEzMzc5MTIsOC45OTYxMjE5NyAxNC40ODA0MzIxLDEwLjA5MTU2ODggMTIuNDg1MTU0MiwxMi4wODI1NjMzIEMxMS4xODcwMjE1LDEzLjM3NzkwOTIgMTAuNDAzNzM0NywxNC41NDIzMjExIDkuOTQ0OTgxMDQsMTUuODU5NjU1OSBMOS45NDQ5ODEwNCwxNS44NTk2NTU5IFonCiAgICAgICAgICAgICAgaWQ9J0FXUy1TaW1wbGUtUXVldWUtU2VydmljZV9JY29uXzMyX1NxdWlkJyBmaWxsPScjRkZGRkZGJz48L3BhdGg+CiAgICA8L2c+Cjwvc3ZnPg==">
+      <bpmn:extensionElements>
+        <zeebe:taskDefinition type="io.camunda:aws-sqs:1" retries="3" />
+        <zeebe:ioMapping>
+          <zeebe:input source="credentials" target="authentication.type" />
+          <zeebe:input source="{{secrets.ALFIO_AWS_ACCESS_KEY_ID}}" target="authentication.accessKey" />
+          <zeebe:input source="{{secrets.ALFIO_AWS_SECRET_ACCESS_KEY}}" target="authentication.secretKey" />
+          <zeebe:input source="https://sqs.us-east-1.amazonaws.com/590183882432/sfn-bookstore-checkout-OrdersQueueCamunda" target="queue.url" />
+          <zeebe:input source="standard" target="queue.type" />
+          <zeebe:input source="us-east-1" target="configuration.region" />
+          <zeebe:input source="=prepareBody.messageBody" target="queue.messageBody" />
+        </zeebe:ioMapping>
+        <zeebe:taskHeaders>
+          <zeebe:header key="resultVariable" value="resultSQSWorker" />
+          <zeebe:header key="resultExpression" value="=response" />
+          <zeebe:header key="retryBackoff" value="PT0S" />
+        </zeebe:taskHeaders>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_14vtb4x</bpmn:incoming>
+      <bpmn:outgoing>Flow_1leg9bl</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="Activity_1a1dowg" name="Redeem Points" zeebe:modelerTemplate="io.camunda.connectors.AWSLAMBDA.v2" zeebe:modelerTemplateVersion="5" zeebe:modelerTemplateIcon="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0nMTgnIGhlaWdodD0nMTgnIHZpZXdCb3g9JzAgMCA0OCA0OCcgdmVyc2lvbj0nMS4xJyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnCiAgICAgeG1sbnM6eGxpbms9J2h0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsnPgogICAgPHRpdGxlPkljb24tUmVzb3VyY2UvQ29tcHV0ZS9SZXNfQW1hem9uLUxhbWJkYV9MYW1iZGEtRnVuY3Rpb25fNDhfTGlnaHQ8L3RpdGxlPgogICAgPGcgaWQ9J0ljb24tUmVzb3VyY2UvQ29tcHV0ZS9SZXNfQW1hem9uLUxhbWJkYV9MYW1iZGEtRnVuY3Rpb25fNDgnIHN0cm9rZT0nbm9uZScgc3Ryb2tlLXdpZHRoPScxJyBmaWxsPSdub25lJwogICAgICAgZmlsbC1ydWxlPSdldmVub2RkJz4KICAgICAgICA8cGF0aCBkPSdNMjQsNDQgQzEyLjk3Miw0NCA0LDM1LjAyOCA0LDI0IEM0LDEyLjk3MiAxMi45NzIsNCAyNCw0IEMzNS4wMjgsNCA0NCwxMi45NzIgNDQsMjQgQzQ0LDM1LjAyOCAzNS4wMjgsNDQgMjQsNDQgTDI0LDQ0IFogTTI0LDIgQzExLjg2OSwyIDIsMTEuODY5IDIsMjQgQzIsMzYuMTMxIDExLjg2OSw0NiAyNCw0NiBDMzYuMTMxLDQ2IDQ2LDM2LjEzMSA0NiwyNCBDNDYsMTEuODY5IDM2LjEzMSwyIDI0LDIgTDI0LDIgWiBNMTcuMjMxLDM1LjI1IEwxMS44NzYsMzUuMjUgTDE4LjIyMSwyMS45NTkgTDIwLjkwMiwyNy40OTIgTDE3LjIzMSwzNS4yNSBaIE0xOS4xMTQsMTkuMjE1IEMxOC45NDYsMTguODcgMTguNTk3LDE4LjY1MSAxOC4yMTQsMTguNjUxIEwxOC4yMTEsMTguNjUxIEMxNy44MjYsMTguNjUyIDE3LjQ3NywxOC44NzQgMTcuMzEyLDE5LjIyMSBMOS4zODksMzUuODE5IEM5LjI0LDM2LjEyOSA5LjI2MiwzNi40OTMgOS40NDUsMzYuNzgzIEM5LjYyOCwzNy4wNzQgOS45NDcsMzcuMjUgMTAuMjkxLDM3LjI1IEwxNy44NjQsMzcuMjUgQzE4LjI1MSwzNy4yNSAxOC42MDMsMzcuMDI3IDE4Ljc2OSwzNi42NzggTDIyLjkxNSwyNy45MTUgQzIzLjA0NCwyNy42NDIgMjMuMDQzLDI3LjMyMyAyMi45MTEsMjcuMDUxIEwxOS4xMTQsMTkuMjE1IFogTTM2LjEyNSwzNS4yNSBMMzAuNjczLDM1LjI1IEwyMC43NjEsMTMuOTUzIEMyMC41OTcsMTMuNjAxIDIwLjI0MywxMy4zNzUgMTkuODU0LDEzLjM3NSBMMTYuMjUxLDEzLjM3NSBMMTYuMjU1LDkuMjUgTDIzLjQ3NSw5LjI1IEwzMy4zMzksMzAuNTQ1IEMzMy41MDMsMzAuODk4IDMzLjg1NiwzMS4xMjUgMzQuMjQ2LDMxLjEyNSBMMzYuMTI1LDMxLjEyNSBMMzYuMTI1LDM1LjI1IFogTTM3LjEyNSwyOS4xMjUgTDM0Ljg4NSwyOS4xMjUgTDI1LjAyMSw3LjgzIEMyNC44NTYsNy40NzcgMjQuNTAzLDcuMjUgMjQuMTEzLDcuMjUgTDE1LjI1Niw3LjI1IEMxNC43MDQsNy4yNSAxNC4yNTcsNy42OTcgMTQuMjU2LDguMjQ5IEwxNC4yNSwxNC4zNzQgQzE0LjI1LDE0LjY0IDE0LjM1NSwxNC44OTQgMTQuNTQzLDE1LjA4MiBDMTQuNzMsMTUuMjcgMTQuOTg0LDE1LjM3NSAxNS4yNSwxNS4zNzUgTDE5LjIxNywxNS4zNzUgTDI5LjEyOSwzNi42NzIgQzI5LjI5MywzNy4wMjQgMjkuNjQ2LDM3LjI1IDMwLjAzNSwzNy4yNSBMMzcuMTI1LDM3LjI1IEMzNy42NzgsMzcuMjUgMzguMTI1LDM2LjgwMyAzOC4xMjUsMzYuMjUgTDM4LjEyNSwzMC4xMjUgQzM4LjEyNSwyOS41NzIgMzcuNjc4LDI5LjEyNSAzNy4xMjUsMjkuMTI1IEwzNy4xMjUsMjkuMTI1IFonCiAgICAgICAgICAgICAgaWQ9J0FtYXpvbi1MYW1iZGEtTGFtYmRhLUZ1bmN0aW9uX1Jlc291cmNlLUljb25fbGlnaHQtYmcnIGZpbGw9JyNENDVCMDcnPjwvcGF0aD4KICAgIDwvZz4KPC9zdmc+">
+      <bpmn:extensionElements>
+        <zeebe:taskDefinition type="io.camunda:aws-lambda:1" retries="3" />
+        <zeebe:ioMapping>
+          <zeebe:input source="credentials" target="authentication.type" />
+          <zeebe:input source="{{secrets.ALFIO_AWS_ACCESS_KEY_ID}}" target="authentication.accessKey" />
+          <zeebe:input source="{{secrets.ALFIO_AWS_SECRET_ACCESS_KEY}}" target="authentication.secretKey" />
+          <zeebe:input source="us-east-1" target="configuration.region" />
+          <zeebe:input source="sync" target="awsFunction.operationType" />
+          <zeebe:input source="arn:aws:lambda:us-east-1:590183882432:function:sfn-bookstore-checkout-RedeemPointsFunction" target="awsFunction.functionName" />
+          <zeebe:input source="=combined" target="awsFunction.payload" />
+        </zeebe:ioMapping>
+        <zeebe:taskHeaders>
+          <zeebe:header key="resultVariable" value="respRedeemPoints" />
+          <zeebe:header key="resultExpression" value="=response" />
+          <zeebe:header key="retryBackoff" value="PT0S" />
+        </zeebe:taskHeaders>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0bwup1u</bpmn:incoming>
+      <bpmn:outgoing>Flow_053uax8</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:exclusiveGateway id="Gateway_0mgkxm9" name="Redeem points?">
+      <bpmn:incoming>Flow_1x8869y</bpmn:incoming>
+      <bpmn:outgoing>Flow_0bwup1u</bpmn:outgoing>
+      <bpmn:outgoing>Flow_1ebkpkn</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:sequenceFlow id="Flow_1ebkpkn" name="redeem=false" sourceRef="Gateway_0mgkxm9" targetRef="Gateway_1tq6j26">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=input.redeem=false</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_0bwup1u" name="redeem=true" sourceRef="Gateway_0mgkxm9" targetRef="Activity_1a1dowg">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=input.redeem=true</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:startEvent id="StartEvent_1" name="Start">
+      <bpmn:outgoing>Flow_19pfw3w</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:intermediateCatchEvent id="webhook-prepare-order" name="webhook-prepare-order" zeebe:modelerTemplate="io.camunda.connectors.webhook.WebhookConnectorIntermediate.v1" zeebe:modelerTemplateVersion="11" zeebe:modelerTemplateIcon="data:image/svg+xml;base64,PHN2ZyBpZD0naWNvbicgeG1sbnM9J2h0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnJyB3aWR0aD0nMTgnIGhlaWdodD0nMTgnIHZpZXdCb3g9JzAgMCAzMiAzMic+CiAgPGRlZnM+CiAgICA8c3R5bGU+LmNscy0xIHsgZmlsbDogbm9uZTsgfTwvc3R5bGU+CiAgPC9kZWZzPgogIDxwYXRoCiAgICBkPSdNMjQsMjZhMywzLDAsMSwwLTIuODE2NC00SDEzdjFhNSw1LDAsMSwxLTUtNVYxNmE3LDcsMCwxLDAsNi45Mjg3LDhoNi4yNTQ5QTIuOTkxNCwyLjk5MTQsMCwwLDAsMjQsMjZaJy8+CiAgPHBhdGgKICAgIGQ9J00yNCwxNmE3LjAyNCw3LjAyNCwwLDAsMC0yLjU3LjQ4NzNsLTMuMTY1Ni01LjUzOTVhMy4wNDY5LDMuMDQ2OSwwLDEsMC0xLjczMjYuOTk4NWw0LjExODksNy4yMDg1Ljg2ODYtLjQ5NzZhNS4wMDA2LDUuMDAwNiwwLDEsMS0xLjg1MSw2Ljg0MThMMTcuOTM3LDI2LjUwMUE3LjAwMDUsNy4wMDA1LDAsMSwwLDI0LDE2WicvPgogIDxwYXRoCiAgICBkPSdNOC41MzIsMjAuMDUzN2EzLjAzLDMuMDMsMCwxLDAsMS43MzI2Ljk5ODVDMTEuNzQsMTguNDcsMTMuODYsMTQuNzYwNywxMy44OSwxNC43MDhsLjQ5NzYtLjg2ODItLjg2NzctLjQ5N2E1LDUsMCwxLDEsNi44MTItMS44NDM4bDEuNzMxNSwxLjAwMmE3LjAwMDgsNy4wMDA4LDAsMSwwLTEwLjM0NjIsMi4wMzU2Yy0uNDU3Ljc0MjctMS4xMDIxLDEuODcxNi0yLjA3MzcsMy41NzI4WicvPgogIDxyZWN0IGlkPSdfVHJhbnNwYXJlbnRfUmVjdGFuZ2xlXycgZGF0YS1uYW1lPScmbHQ7VHJhbnNwYXJlbnQgUmVjdGFuZ2xlJmd0OycgY2xhc3M9J2Nscy0xJwogICAgd2lkdGg9JzMyJyBoZWlnaHQ9JzMyJy8+Cjwvc3ZnPg==">
+      <bpmn:extensionElements>
+        <zeebe:properties>
+          <zeebe:property name="inbound.type" value="io.camunda:webhook:1" />
+          <zeebe:property name="inbound.method" value="post" />
+          <zeebe:property name="inbound.context" value="prepare-order-correlation" />
+          <zeebe:property name="inbound.shouldValidateHmac" value="disabled" />
+          <zeebe:property name="inbound.auth.type" value="NONE" />
+          <zeebe:property name="inbound.responseExpression" value="={&#34;statusCode&#34;: 201, &#34;body&#34;: {&#34;message&#34;: &#34;callback received&#34;}}" />
+          <zeebe:property name="activationCondition" value="=request.body.status=&#34;ok&#34;" />
+          <zeebe:property name="consumeUnmatchedEvents" value="false" />
+          <zeebe:property name="correlationKeyExpression" value="=request.body.correlationId" />
+          <zeebe:property name="messageTtl" value="PT1M" />
+          <zeebe:property name="resultVariable" value="resultWebhook" />
+          <zeebe:property name="resultExpression" value="={&#10;  &#34;courier&#34;: request.body.courier,&#10;  &#34;correlationPost&#34;: request.body.correlationId&#10;}" />
+        </zeebe:properties>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1leg9bl</bpmn:incoming>
+      <bpmn:outgoing>Flow_1wospbf</bpmn:outgoing>
+      <bpmn:messageEventDefinition id="MessageEventDefinition_1pstj24" messageRef="Message_1igfwuz" />
+    </bpmn:intermediateCatchEvent>
+  </bpmn:process>
+  <bpmn:message id="Message_1j7hvqd" name="Message_1j7hvqd" />
+  <bpmn:message id="Message_1igfwuz" name="b8fa5e18-a02d-4165-ae1f-614a44dfef71" zeebe:modelerTemplate="io.camunda.connectors.webhook.WebhookConnectorIntermediate.v1">
+    <bpmn:extensionElements>
+      <zeebe:subscription correlationKey="=correlationId" />
+    </bpmn:extensionElements>
+  </bpmn:message>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_05bsdne">
+      <bpmndi:BPMNShape id="Activity_1um3pvi_di" bpmnElement="Activity_1ng3bt4">
+        <dc:Bounds x="560" y="590" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0p5xsgj_di" bpmnElement="Activity_0hvb78p">
+        <dc:Bounds x="640" y="78" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1bsw5ay_di" bpmnElement="Activity_1bsw5ay">
+        <dc:Bounds x="260" y="250" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0eb4aeq_di" bpmnElement="Event_0eb4aeq">
+        <dc:Bounds x="292" y="402" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="271" y="445" width="79" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_09rdya6_di" bpmnElement="Activity_0eddp81">
+        <dc:Bounds x="270" y="78" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_17xt29k_di" bpmnElement="Activity_1vxnu22">
+        <dc:Bounds x="460" y="78" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0mczgq7_di" bpmnElement="Activity_1j8lo66">
+        <dc:Bounds x="820" y="78" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0ikl5yj_di" bpmnElement="Activity_1rjggg2">
+        <dc:Bounds x="560" y="350" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_14ug1ht_di" bpmnElement="Activity_14ia8v4">
+        <dc:Bounds x="1060" y="730" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_09mkd4j_di" bpmnElement="Event_09mkd4j">
+        <dc:Bounds x="1242" y="752" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1250" y="795" width="20" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_1tq6j26_di" bpmnElement="Gateway_1tq6j26" isMarkerVisible="true">
+        <dc:Bounds x="585" y="475" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_14h1e7p_di" bpmnElement="Activity_17zhrxk">
+        <dc:Bounds x="560" y="730" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0qrjcj3_di" bpmnElement="Activity_1r6jm12">
+        <dc:Bounds x="740" y="730" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1s8i7hr_di" bpmnElement="Activity_1a1dowg">
+        <dc:Bounds x="560" y="190" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_0mgkxm9_di" bpmnElement="Gateway_0mgkxm9" isMarkerVisible="true">
+        <dc:Bounds x="845" y="205" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="910" y="220" width="81" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="152" y="100" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="158" y="143" width="24" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1b59l9p_di" bpmnElement="webhook-prepare-order">
+        <dc:Bounds x="932" y="752" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="910" y="795" width="89" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1lqkln9_di" bpmnElement="Event_1lqkln9">
+        <dc:Bounds x="292" y="140" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="327" y="173" width="87" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_053uax8_di" bpmnElement="Flow_053uax8">
+        <di:waypoint x="610" y="270" />
+        <di:waypoint x="610" y="350" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_070ny66_di" bpmnElement="Flow_070ny66">
+        <di:waypoint x="610" y="525" />
+        <di:waypoint x="610" y="590" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0776odf_di" bpmnElement="Flow_0776odf">
+        <di:waypoint x="1160" y="770" />
+        <di:waypoint x="1242" y="770" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0sgw0uv_di" bpmnElement="Flow_0sgw0uv">
+        <di:waypoint x="560" y="118" />
+        <di:waypoint x="640" y="118" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0xjkbt6_di" bpmnElement="Flow_0xjkbt6">
+        <di:waypoint x="610" y="670" />
+        <di:waypoint x="610" y="730" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_14vtb4x_di" bpmnElement="Flow_14vtb4x">
+        <di:waypoint x="660" y="770" />
+        <di:waypoint x="740" y="770" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_18c43bn_di" bpmnElement="Flow_18c43bn">
+        <di:waypoint x="370" y="118" />
+        <di:waypoint x="460" y="118" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_19pfw3w_di" bpmnElement="Flow_19pfw3w">
+        <di:waypoint x="188" y="118" />
+        <di:waypoint x="270" y="118" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1a7d72f_di" bpmnElement="Flow_1a7d72f">
+        <di:waypoint x="310" y="330" />
+        <di:waypoint x="310" y="402" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1dfz38c_di" bpmnElement="Flow_1dfz38c">
+        <di:waypoint x="310" y="176" />
+        <di:waypoint x="310" y="250" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1leg9bl_di" bpmnElement="Flow_1leg9bl">
+        <di:waypoint x="840" y="770" />
+        <di:waypoint x="932" y="770" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1lg2xhb_di" bpmnElement="Flow_1lg2xhb">
+        <di:waypoint x="740" y="118" />
+        <di:waypoint x="820" y="118" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1onpdz9_di" bpmnElement="Flow_1onpdz9">
+        <di:waypoint x="610" y="430" />
+        <di:waypoint x="610" y="475" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1wospbf_di" bpmnElement="Flow_1wospbf">
+        <di:waypoint x="968" y="770" />
+        <di:waypoint x="1060" y="770" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1x8869y_di" bpmnElement="Flow_1x8869y">
+        <di:waypoint x="870" y="158" />
+        <di:waypoint x="870" y="205" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1ebkpkn_di" bpmnElement="Flow_1ebkpkn">
+        <di:waypoint x="870" y="255" />
+        <di:waypoint x="870" y="500" />
+        <di:waypoint x="635" y="500" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="786" y="362" width="67" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0bwup1u_di" bpmnElement="Flow_0bwup1u">
+        <di:waypoint x="845" y="230" />
+        <di:waypoint x="660" y="230" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="721" y="212" width="63" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

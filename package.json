@@ -15,7 +15,8 @@
   "dependencies": {
     "@aws-sdk/client-dynamodb": "^3.699.0",
     "@aws-sdk/client-sfn": "^3.699.0",
-    "@aws-sdk/client-sqs": "^3.712.0"
+    "@aws-sdk/client-sqs": "^3.712.0",
+    "axios": "^1.7.9"
   },
   "devDependencies": {
     "esbuild": "^0.24.0",

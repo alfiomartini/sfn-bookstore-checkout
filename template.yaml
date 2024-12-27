@@ -26,6 +26,11 @@ Resources:
     Properties:
       QueueName: "sfn-bookstore-checkout-OrdersQueue"
 
+  OrdersQueueCamunda:
+    Type: "AWS::SQS::Queue"
+    Properties:
+      QueueName: "sfn-bookstore-checkout-OrdersQueueCamunda"
+
   NotifyCourierTopic:
     Type: "AWS::SNS::Topic"
     Properties:
@@ -156,6 +161,22 @@ Resources:
           Type: SQS
           Properties:
             Queue: !GetAtt OrdersQueue.Arn
+            BatchSize: 1
+
+  SQSWorkerFunctionCamunda:
+    Type: "AWS::Serverless::Function"
+    Description: "This function is used only by the Camunda Workflow Engine"
+    Properties:
+      FunctionName: "sfn-bookstore-checkout-SQSWorkerFunctionCamunda"
+      Handler: index.sqsWorkerCamunda
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: !Ref BookTable
+      Events:
+        SQSEvent:
+          Type: SQS
+          Properties:
+            Queue: !GetAtt OrdersQueueCamunda.Arn
             BatchSize: 1
 
   StepFunctionsExecutionRole:

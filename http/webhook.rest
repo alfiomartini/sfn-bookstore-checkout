@@ -1,0 +1,7 @@
+POST https://ont-1.connectors.camunda.io/1441efd8-f293-40f9-bd74-b01cb8f579ff/inbound/prepare-order-correlation
+Content-Type: application/json
+
+{
+    "correlationId":"1234-abcd",
+    "courier":"alfio.martini@encora.com"
+}

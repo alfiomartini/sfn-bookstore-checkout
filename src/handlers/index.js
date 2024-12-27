@@ -10,6 +10,8 @@ import {
   GetItemCommand,
 } from "@aws-sdk/client-dynamodb";
 
+import axios from "axios";
+
 import { SQSClient, DeleteMessageCommand } from "@aws-sdk/client-sqs";
 
 const region = process.env.AWS_REGION || "us-east-1";
@@ -183,6 +185,14 @@ export const sqsWorker = async (event) => {
     // noCourierAvailableError.name = "NoCourierAvailable";
     // throw noCourierAvailableError;
 
+    // Delete the message from the queue
+    await sqsClient.send(
+      new DeleteMessageCommand({
+        QueueUrl: queueUrl,
+        ReceiptHandle: receiptHandle,
+      })
+    );
+
     // Attach courier information to the order
     await stepFunctionsClient.send(
       new SendTaskSuccessCommand({
@@ -192,13 +202,6 @@ export const sqsWorker = async (event) => {
     );
 
     return { courier };
-    // Delete the message from the queue
-    await sqsClient.send(
-      new DeleteMessageCommand({
-        QueueUrl: queueUrl,
-        ReceiptHandle: receiptHandle,
-      })
-    );
   } catch (e) {
     console.log("===== You got an Error =====");
     console.log(e);
@@ -211,6 +214,63 @@ export const sqsWorker = async (event) => {
         taskToken: body.Token,
       })
     );
+    return "No couriers available";
+  }
+};
+
+export const sqsWorkerCamunda = async (event) => {
+  try {
+    const record = event.Records[0];
+
+    const body = JSON.parse(record.body);
+    const receiptHandle = record.receiptHandle;
+    const queueUrl = record.eventSourceARN.split(":")[5];
+
+    console.log("record: ", record);
+    console.log("sqs worker body: ", body);
+    console.log("receiptHandle: ", receiptHandle);
+    console.log("queueUrl: ", queueUrl);
+    console.log("correlationId", body.correlationId);
+
+    // Update book quantity
+    await updateBookQuantity(body.Input.bookId, body.Input.quantity);
+
+    /** Find a courier and attach courier information to the order */
+    const courier = "alfio.martini@encora.com";
+
+    // throw "Something wrong with Courier API";
+    // const noCourierAvailableError = new Error(
+    //   "Something wrong with Courier API"
+    // );
+    // noCourierAvailableError.name = "NoCourierAvailable";
+    // throw noCourierAvailableError;
+
+    // Delete the message from the queue
+    await sqsClient.send(
+      new DeleteMessageCommand({
+        QueueUrl: queueUrl,
+        ReceiptHandle: receiptHandle,
+      })
+    );
+
+    // // Make a POST request using axios
+    // const response = await axios.post(
+    //   "https://ont-1.connectors.camunda.io/1441efd8-f293-40f9-bd74-b01cb8f579ff/inbound/865c332f-c0d5-43c7-b69d-47440ef13379",
+    //   {
+    //     correlationId: body.correlationId,
+    //     courier: courier,
+    //   }
+    // );
+
+    // console.log("POST request response: ", response.data);
+
+    return { courier };
+  } catch (e) {
+    console.log("===== You got an Error =====");
+    console.log(e);
+    const record = event.Records[0];
+    const body = JSON.parse(record.body);
+
     return "No couriers available";
   }
 };
